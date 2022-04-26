@@ -1,0 +1,108 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <meta charset="UTF-8" />
+    <meta http-equiv="X-UA-Compatible" content="IE=edge" />
+    <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+    <title>Document</title>
+
+    <link
+      rel="stylesheet"
+      href="https://unicons.iconscout.com/release/v4.0.0/css/line.css"
+    />
+    <link rel="stylesheet" href="css/findBuddy.css" />
+  </head>
+  <body>
+    <nav>
+      <div class="container">
+        <h2 class="logo">Foodogram</h2>
+        <div class="search-bar">
+          <i class="uil uil-search"></i>
+          <input
+            type="text"
+            placeholder="Search for recipes, ingredients and more"
+          />
+        </div>
+        <div class="create">
+          <label class="btn btn-primary" for="create-post">
+            <a href="/createpost"> <span>Create </span></a>
+                    </label>
+          <div class="profile-picture">
+            <img src="./Images/profile.jpg" alt="logo" />
+          </div>
+        </div>
+      </div>
+    </nav>
+    <!---main-->
+    <main>
+      <div class="container">
+        <!--Leftbox-->
+        <div class="left">
+          <a href="" class="profile">
+            <div class="profile-picture">
+              <img src="./Images/profile.jpg" alt="logo" />
+            </div>
+            <div class="handle">
+              <h3>NAME</h3>
+              <p class="text-muted">@username</p>
+            </div>
+          </a>
+          <!--sidebar-->
+          <div class="sidebar">
+            <a href="/home" class="menu-item">
+              <span> <i class="uil uil-home"></i></span>
+              <h3>Home</h3>
+            </a>
+            <a href="/home" class="menu-item" id="message-notification">
+              <span> <i class="uil uil-message"></i></span>
+              <h3>Messages</h3>
+            </a>
+            <a class="menu-item active">
+              <span> <i class="uil uil-users-alt"></i></span>
+              <h3>Find My Buddy</h3>
+            </a>
+            <label for="create-post" class=" btn btn-primary"><a href="/createpost">Create Post</a></label>
+          </div>
+        </div>
+        <!--right-->
+        <div class="middle">
+            <form class="create-post" >
+                <div class="label">
+                    <label for="exampleFormControlSelect1">What do you feel like eating today?</label>
+                    <!-- <select class="form-control" id="exampleFormControlSelect1">
+                        <option>1</option>
+                        <option>2</option>
+                        <option>3</option>
+                        <option>4</option>
+                        <option>5</option>
+                    </select> -->
+                   
+                <input type="text" placeholder="" id="create post">
+                <input type="submit" value="Find Your Buddy" class="btn btn-submit">
+            </form>
+        </div>
+       
+      </div>
+    </main>
+
+    <!-- <script src="./index.js"></script> -->
+  </body>
+  
+  <script type="text/javascript">
+  const menuItems=document.querySelectorAll('.menu-item');
+
+const changeActiveItem=()=>{
+    menuItems.forEach(item=>{
+        item.classList.remove('active');
+    });
+}
+
+menuItems.forEach(item=>{
+    item.addEventListener('click',()=>{
+        changeActiveItem();
+        item.classList.add('active');
+      
+    });
+})
+</script>
+</html>
