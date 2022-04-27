@@ -37,17 +37,20 @@
               <div class="row g-0">
                 <div class="col-lg-6">
                   <div class="card-body p-md-5 mx-md-4">
-                    <form class="mt-5">
+                    <form class="mt-5" action="/" method="POST">
                       <div class="form-outline mb-4">
                         <label class="form-label" for="form2Example11"
-                          >Username</label
+                          >Email-Id</label
                         >
                         <input
                           type="email"
                           id="form2Example11"
                           class="form-control"
                           placeholder="Enter Email Address"
+                          name="email"
                         />
+                        
+                       
                       </div>
 
                       <div class="form-outline mb-4">
@@ -59,13 +62,20 @@
                           id="form2Example22"
                           class="form-control"
                           placeholder="Enter Password"
+                          name="password"
                         />
+                        <% if(typeof(message) != 'undefined') { %>
+                          <div class="alert alert-danger mt-2">
+                            <%= message %>
+                            </div>
+                            <% } %>
+                        
                       </div>
 
                       <div class="text-center pt-1 mb-5 pb-1">
                         <button
                           class="btn btn-primary btn-block fa-lg gradient-custom-2 mb-3"
-                          type="button"
+                          type="submit"
                         >
                           Log in
                         </button>
