@@ -2,6 +2,8 @@ const express = require('express');
 const bodyParser = require('body-parser');
 const {check, validationResult} = require('express-validator');
 const app = express();
+var cookieParser = require('cookie-parser')
+app.use(cookieParser())
 
 
 const mongoose=require('mongoose');
@@ -52,6 +54,7 @@ app.listen(3000, function() {
  
 //loginpage
 app.get('/',(req,res)=>{
+
     res.render('login');  
 })
 app.post('/',(req,res)=>{
