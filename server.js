@@ -135,3 +135,8 @@ app.get('/findmybuddy',(req,res)=>{
 app.get('/createpost',(req,res)=>{
     res.render('createPost');  
 })
+
+//message
+app.get('/message',(req,res)=>{
+    res.render('message');  
+})
