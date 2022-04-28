@@ -10,7 +10,7 @@ app.use(cookieParser());
 // app.use(cookieParser());
 
 app.set("view engine", "ejs");
-var mongo = require('mongodb');
+var mongo = require('mongodb') ;
 var db = require('./db.js');
 const User = require("./userModel");
 db();

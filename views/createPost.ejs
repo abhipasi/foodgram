@@ -66,6 +66,7 @@
         </div>
         <!--right-->
         <div class="right">
+          <form>
           <div class="messages">
             <div class="heading">
               <h4>Upload Your Image <label for="file-ip-1"><i class="uil uil-plus" id="plus"></i></label>
@@ -82,22 +83,34 @@
             <div class="message">
               <div class="message-body">
                 <div class="action">
-                  <button class="btn btn-primary" onclick="display()" id="generate-caption">
-                      Generate Caption
-                  </button>
                   <p class="image-cap1">Image caption</p>
-                  <button class="btn" id="write-caption" onclick="displayManual()">
+                  <p class="image-cap-another">Image Another caption</p>
+                  <p class="image-cap-crawled">Image caption Crawled</p>
+                  <input type="text" class="image-cap2" placeholder="write your own caption">
+                  <div class="buttons">
+                  <label class="btn btn-primary" onclick="display()" id="generate-caption">
+                      Generate Caption
+                  </label>
+                  <label class="btn btn-primary" onclick="displayAnother()" id="generate-caption-another">
+                    Generate Another Caption
+                </label>
+                <label class="btn btn-primary" onclick="displayCrawled()" id="generate-caption-ig">
+                Not Impressed? Use our Caption Crawler 
+              </label>
+            </div>
+                  <label class="btn" id="write-caption" onclick="displayManual()">
                      Write your caption
-                  </button>
-                  <p class="image-cap2">caption</p>
-                  
+                  </label>
+                 
               </div>
               <div class="submit">
-                <input type="submit" value="Post" class="btn btn-submit">
+                <button type="submit" value="Post" class="btn btn-submit">Post</button>
+                
               </div>
               </div>
             </div>
           </div>
+          </form>
         </div>
       </div>
     </main>
@@ -123,13 +136,39 @@ function display() {
     document.getElementById("write-caption").style.display = "block";
     document.getElementsByClassName("image-cap1")[0].style.display = "block";
     document.getElementsByClassName("image-cap2")[0].style.display = "none";
+    document.getElementById("generate-caption-another").style.display = "flex";
+    document.getElementById("generate-caption-ig").style.display = "flex";
 }
 
 function displayManual() {
-    document.getElementById("generate-caption").style.display = "block";
+    document.getElementById("generate-caption").style.display = "none";
     document.getElementById("write-caption").style.display = "none";
     document.getElementsByClassName("image-cap2")[0].style.display = "block";
     document.getElementsByClassName("image-cap1")[0].style.display = "none";
+    document.getElementsByClassName("image-cap-another")[0].style.display = "none";
+    document.getElementsByClassName("image-cap-crawled")[0].style.display = "none";
+    document.getElementById("generate-caption-another").style.display = "none";
+    document.getElementById("generate-caption-ig").style.display = "none";
 }
+function displayAnother() {
+    
+    document.getElementById("write-caption").style.display = "flex";
+    document.getElementsByClassName("image-cap-another")[0].style.display = "block";
+    document.getElementsByClassName("image-cap2")[0].style.display = "none";
+    document.getElementById("generate-caption-ig").style.display = "flex";
+    document.getElementsByClassName("image-cap1")[0].style.display = "none";
+    document.getElementsByClassName("image-cap-crawled")[0].style.display = "none";
+}
+
+function displayCrawled() {
+   
+    document.getElementById("write-caption").style.display = "flex";
+    document.getElementsByClassName("image-cap-crawled")[0].style.display = "block";
+    document.getElementsByClassName("image-cap2")[0].style.display = "none";
+    document.getElementById("generate-caption-another").style.display = "flex";
+    document.getElementById("generate-caption-ig").style.display = "flex";
+    document.getElementsByClassName("image-cap-another")[0].style.display = "none";
+}
+
 </script>
 </html>
