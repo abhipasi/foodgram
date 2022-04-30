@@ -558,7 +558,21 @@ display: flex;
     padding: var(--search-padding);
   }
 
-  #uploadbtn,#imagecap{
+  #uploadbtn{
       display: none;
   }
-
+#file-ip-1-preview{
+    max-width: 100%;
+    height: auto;
+    border-radius: var(--border-radius);
+    
+}
+.preview2{
+   
+    overflow: hidden;
+    margin: 0.7rem 0;
+    
+    width:30em;
+    
+    padding: 20px;
+}
