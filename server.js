@@ -165,7 +165,7 @@ app.post(
 //home
 app.get("/home", (req, res) => {
   if (req.cookies.id) {
-    const id = request.cookies.id;
+    const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
 
@@ -212,7 +212,7 @@ app.post("/addpost", (req, res) => {
 //findmybuddy
 app.get("/findmybuddy", (req, res) => {
   if (req.cookies.id) {
-    const id = request.cookies.id;
+    const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
 
