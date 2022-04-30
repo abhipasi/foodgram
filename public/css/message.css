@@ -138,7 +138,7 @@ main{
 }
 main .container{
     display: grid;
-    grid-template-columns:  15vw 45vw auto;
+    grid-template-columns:  15vw auto 17vw;
     column-gap: 2rem;
     position: relative;
 }
@@ -529,3 +529,12 @@ display: flex;
     
     width: 100%;
 }
+.middle{
+    background: var(--color-white);
+    border-radius: var(--card-border-radius);
+    padding: var(--card-padding);
+    margin:1rem 0;
+    font-size: 0.85rem;
+    line-height: 1.5;
+}
+
