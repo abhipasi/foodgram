@@ -18,19 +18,9 @@ db();
 const bcrypt = require("bcrypt");
 const jwt = require("jsonwebtoken");
 const auth = require("./auth");
-
+const { spawn } = require("child_process");
 const { check, validationResult } = require("express-validator");
 
-//schema
-// const userSchema=new mongoose.Schema({
-//     name:{type:String,required:true},
-//     username:{type:String,required:true,unique:true},
-//     address:String,
-//     email:String,
-//     password:String,
-//     gender:String,
-//     created:{type:Date,default: Date.now}
-// });
 
 //loginpage
 app.get("/", (req, res) => {
@@ -267,22 +257,48 @@ app.post("/addimage", upload.single("filename"), (req, res, next) => {
         // try {
         if (!req.file) {
           console.log("Please select an image file");
+        } else {
+          const filepath = `uploads/${req.file.filename}`;
+          console.log(filepath);
+          let image = {};
+          image["file"] = filepath;
+          console.log(image);
+          res.cookie("image", image);
+          res.render("createPost", { path: filepath });
         }
-        else{
-        const filepath = `uploads/${req.file.filename}`;
-        console.log(filepath);
-        let image={}
-        image['file']=filepath;
-        console.log(image)
-        res.cookie('image',image)
-        res.render('createPost',{path:filepath});
       }
-    }
     });
   }
 });
 
-app.post("/generate1", (req, res) => {
+app.post("/generate", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
+
+      if (err) res.render("login");
+      else {
+        if (req.cookies.image) {
+          cook=req.cookies.image;
+          const filepath = req.cookies.image['file'];
+          console.log(filepath);
+          const python = spawn("python", [
+            "caption generation/imagecaption.py",
+            filepath,
+          ]);
+          python.stdout.on("data", function (data) {
+            res.render("createPost", { caption: data.toString() });
+          });
+        } else {
+          console.log('no')
+        }
+      }
+    });
+  }
+});
+
+app.post('/classify',(req,res)=>{
   if (req.cookies.id) {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
@@ -292,24 +308,21 @@ app.post("/generate1", (req, res) => {
       else {
         if (req.cookies.image) {
           const filepath = req.cookies.image.path;
-          console.log(filepath)
-          User.findOne({ _id: id }, function (err, user) {
-            //find the post base on post name or whatever criteria
-      
-            if (err) res.render("login");
-            else {
-              
-            }
+          console.log(filepath);
+          const python = spawn("python", [
+            "classification/predict.py",
+            filepath,
+          ]);
+          python.stdout.on("data", function (data) {
+            res.cookie()
+            res.render("createPost", { caption: data.toString() });
           });
+        } else {
+          res.render("createpost");
         }
-        
       }
     });
   }
-});
-
-app.get('/chat',(req,res)=>{
-  res.render('message')
 });
 
 

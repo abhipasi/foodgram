@@ -96,18 +96,20 @@
             <div class="message" id="imagecap">
               <div class="message-body">
                 <div class="action">
-                  <p class="image-cap1">Image caption</p>
+                  <% if (typeof(caption)!='undefined'){%>
+                  <p class="image-cap1"><%=caption%>></p>
+                  <%}%>
                   <p class="image-cap-another">Image Another caption</p>
                   <p class="image-cap-crawled">Image caption Crawled</p>
                   <input type="text" class="image-cap2" placeholder="write your own caption">
-                  <form action="/generate1" method="post">
+                  <form action="/generate" method="post">
                   <div class="buttons">
                     
                   <button class="btn btn-primary" onclick="display()" id="generate-caption">
                       Generate Caption
                   </button>
                </form>
-                <form action="/generate2" method="post">
+                <form action="/generate" method="post">
                
                   <button class="btn btn-primary" onclick="displayAnother()" id="generate-caption-another">
                     Generate Another Caption
