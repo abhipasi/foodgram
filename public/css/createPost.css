@@ -557,3 +557,8 @@ display: flex;
     border-radius: var(--border-radius);
     padding: var(--search-padding);
   }
+
+  #uploadbtn,#imagecap{
+      display: none;
+  }
+

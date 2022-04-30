@@ -71,16 +71,20 @@
             <div class="heading">
               <h4>Upload Your Image <label for="file-ip-1"><i class="uil uil-plus" id="plus"></i></label>
                 <label for="file-ip-1"><i class="uil uil-edit" id="edit"></i></label></h4>
+                
               <div class="form-input">
                 <div class="preview">
                   <img id="file-ip-1-preview">
                 </div>
                 
                 <input type="file" name="filename" id="file-ip-1" accept="image/*" onchange="showPreview(event);">
-                
+                <div>
+                <button id="uploadbtn" type="'submit" class="btn btn-submit">Next</button>
+                </div>
               </div>
+              
             </div>
-            <div class="message">
+            <div class="message" id="imagecap">
               <div class="message-body">
                 <div class="action">
                   <p class="image-cap1">Image caption</p>
@@ -137,6 +141,7 @@
     preview.style.display = "block";
     document.getElementById("plus").style.display = "none";
     document.getElementById("edit").style.display = "block";
+    document.getElementById("uploadbtn").style.display = "block";
   }
   
 }
