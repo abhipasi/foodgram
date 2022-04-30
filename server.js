@@ -308,6 +308,10 @@ app.post("/generate1", (req, res) => {
   }
 });
 
+app.get('/chat',(req,res)=>{
+  res.render('message')
+});
+
 
 
 app.listen(3000, function () {
