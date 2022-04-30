@@ -44,11 +44,7 @@ const UserSchema = new mongoose.Schema({
     },
   ],
   post:[{
-    img:
-    {
-        data: Buffer,
-        contentType: String
-    },
+    img:String,
     generatedcaption1: String,
     generatedcaption2:String,
     usercaption:String,
