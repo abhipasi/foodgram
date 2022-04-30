@@ -66,7 +66,8 @@
         </div>
         <!--right-->
         <div class="right">
-          <form action="/createpost" method="post" enctype="multipart/form-data">
+          <% if(typeof(path) == 'undefined') { %>
+          <form action="/addimage" method="post" enctype="multipart/form-data">
           <div class="messages">
             <div class="heading">
               <h4>Upload Your Image <label for="file-ip-1"><i class="uil uil-plus" id="plus"></i></label>
@@ -82,8 +83,16 @@
                 <button id="uploadbtn" type="'submit" class="btn btn-submit">Next</button>
                 </div>
               </div>
-              
             </div>
+            </div>
+            </form>
+            <%}%>
+           <% if(typeof(path) != 'undefined') {%>
+            <div class="messages">
+              
+              <div class="preview2">
+                <img  src='./<%=path%>' id="file-ip-1-preview" >
+              </div>
             <div class="message" id="imagecap">
               <div class="message-body">
                 <div class="action">
@@ -93,23 +102,23 @@
                   <input type="text" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate1" method="post">
                   <div class="buttons">
-                    <button type="submit" name="caption">
-                  <label class="btn btn-primary" onclick="display()" id="generate-caption">
+                    
+                  <button class="btn btn-primary" onclick="display()" id="generate-caption">
                       Generate Caption
-                  </label>
-                </button></form>
+                  </button>
+               </form>
                 <form action="/generate2" method="post">
-                <button type="submit" name="caption2">
-                  <label class="btn btn-primary" onclick="displayAnother()" id="generate-caption-another">
+               
+                  <button class="btn btn-primary" onclick="displayAnother()" id="generate-caption-another">
                     Generate Another Caption
-                </label>
+               
               </button></form>
               <form action="/classify" method="post">
-              <button type="submit" name="classification">
-                <label class="btn btn-primary" onclick="displayCrawled()" id="generate-caption-ig">
+              
+                <button class="btn btn-primary" onclick="displayCrawled()" id="generate-caption-ig">
                 Not Impressed? Use our Caption Crawler 
-              </label>
-            </button></form>
+              </button>
+           </form>
             </div>
                   <label class="btn" id="write-caption" onclick="displayManual()">
                      Write your caption
@@ -121,6 +130,8 @@
                 
               </div>
               </div>
+              </div>
+              <%}%>
             </div>
           </form>
           </div>

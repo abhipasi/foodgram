@@ -226,7 +226,7 @@ app.get("/findmybuddy", (req, res) => {
 
 var storage = multer.diskStorage({
   destination: function (req, file, cb) {
-    cb(null, "./uploads");
+    cb(null, "./public/uploads");
   },
   filename: function (req, file, cb) {
     cb(
@@ -256,7 +256,7 @@ app.get("/createpost", (req, res) => {
 // app.post('/createpost',(req,res)=>{
 //     console.log(req.body);
 // });
-app.post("/createpost", upload.single("filename"), (req, res, next) => {
+app.post("/addimage", upload.single("filename"), (req, res, next) => {
   if (req.cookies.id) {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
@@ -268,22 +268,16 @@ app.post("/createpost", upload.single("filename"), (req, res, next) => {
         if (!req.file) {
           console.log("Please select an image file");
         }
+        else{
         const filepath = `uploads/${req.file.filename}`;
         console.log(filepath);
         let image={}
         image['file']=filepath;
         console.log(image)
         res.cookie('image',image)
-        // user.post.push({
-        //   img: filepath
-        // });
-        // user.save(function (err) {
-        //   err != null ? console.log(err) : console.log("Data updated");
-        // });
-        // } catch (e) {
-        //   console.log(e);
-        // }
+        res.render('createPost',{path:filepath});
       }
+    }
     });
   }
 });
@@ -296,11 +290,30 @@ app.post("/generate1", (req, res) => {
 
       if (err) res.render("login");
       else {
+        if (req.cookies.image) {
+          const filepath = req.cookies.image.path;
+          console.log(filepath)
+          User.findOne({ _id: id }, function (err, user) {
+            //find the post base on post name or whatever criteria
+      
+            if (err) res.render("login");
+            else {
+              
+            }
+          });
+        }
         
       }
     });
   }
 });
+
+app.get('/chat',(req,res)=>{
+  res.render('message')
+});
+
+
+
 app.listen(3000, function () {
   console.log("listening on 3000");
 });

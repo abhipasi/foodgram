@@ -444,3 +444,7 @@ display: flex;
 
 
  }
+
+ .message-body a{
+    color: black;
+}
