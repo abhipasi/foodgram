@@ -289,7 +289,6 @@ app.post("/generate", (req, res) => {
             filepath,
           ]);
           python.stdout.on("data", function (data) {
-            console.log('hello')
             console.log(data.toString())
             res.render("createPost", { caption: data.toString() });
           });
