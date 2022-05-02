@@ -258,13 +258,14 @@ app.post("/addimage", upload.single("filename"), (req, res, next) => {
         if (!req.file) {
           console.log("Please select an image file");
         } else {
-          const filepath = `uploads/${req.file.filename}`;
+          const filepath = `public/uploads/${req.file.filename}`;
           console.log(filepath);
           let image = {};
           image["file"] = filepath;
           console.log(image);
           res.cookie("image", image);
-          res.render("createPost", { path: filepath });
+          const path = `/uploads/${req.file.filename}`;
+          res.render("createPost", { path: path });
         }
       }
     });
@@ -288,6 +289,8 @@ app.post("/generate", (req, res) => {
             filepath,
           ]);
           python.stdout.on("data", function (data) {
+            console.log('hello')
+            console.log(data.toString())
             res.render("createPost", { caption: data.toString() });
           });
         } else {

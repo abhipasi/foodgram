@@ -1,10 +1,12 @@
+import os
+os.environ['TF_CPP_MIN_LOG_LEVEL'] = '2'
 import pandas as pd
 import numpy as np
 import tensorflow as tf
 import sys
 import collections
 import random
-df_caption=pd.read_csv('caption generation/captioneddata_final.csv') 
+df_caption=pd.read_csv('C:/Users/shrujal/OneDrive/Desktop/foodogramNode/caption generation/captioneddata_final.csv') 
 df_caption=df_caption.loc[df_caption['label']=='food']
 df_caption = df_caption[df_caption['photo_id']!="LXT4hCf1lRyUeM4HDBaSvg"]
 image_path_to_caption = collections.defaultdict(list)
@@ -107,7 +109,7 @@ def loss_function(real, pred):
     mask = tf.cast(mask, dtype=loss_.dtype)
     loss_ *= mask
     return tf.reduce_mean(loss_)
-checkpoint_path = "./caption generation/checkpoints/finaltrain"
+checkpoint_path = "./checkpoints/finaltrain"
 ckpt = tf.train.Checkpoint(encoder=encoder,decoder=decoder,optimizer = optimizer)
 ckpt_manager = tf.train.CheckpointManager(ckpt, checkpoint_path, max_to_keep=5)
 start_epoch = 0
@@ -133,6 +135,7 @@ def evaluate(image):
         dec_input = tf.expand_dims([predicted_id], 0)
     return result
 testimage_path=image_file=sys.argv[1]
+# print(testimage_path)
 testcaption=''
 testimage_path_to_caption = collections.defaultdict(list)
 testimage_path_to_caption[testimage_path].append(testcaption)
@@ -178,5 +181,12 @@ for imgt in etimg_name_test_keys:
     ecap_test.extend(etimg_to_cap_vector[imgt])
 im = etimg_name_test[0]
 result= evaluate(im)
-print (''.join(result))
+result=' '.join(result)
+if '<start>' in result:
+    result=result.replace('<start>','')
+if '<end>' in result:
+    result=result.replace('<end>','')
+if '<unk>' in result:
+    result=result.replace('<unk>','')
+print(result)
 
