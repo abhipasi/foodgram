@@ -21,7 +21,6 @@ const auth = require("./auth");
 const { spawn } = require("child_process");
 const { check, validationResult } = require("express-validator");
 
-
 //loginpage
 app.get("/", (req, res) => {
   if (req.cookies.id) {
@@ -266,6 +265,7 @@ app.post("/addimage", upload.single("filename"), (req, res, next) => {
           res.cookie("image", image);
           const path = `/uploads/${req.file.filename}`;
           res.render("createPost", { path: path });
+          return;
         }
       }
     });
@@ -281,26 +281,32 @@ app.post("/generate", (req, res) => {
       if (err) res.render("login");
       else {
         if (req.cookies.image) {
-          cook=req.cookies.image;
-          const filepath = req.cookies.image['file'];
+          cook = req.cookies.image;
+          const filepath = req.cookies.image["file"];
           console.log(filepath);
           const python = spawn("python", [
             "caption generation/imagecaption.py",
             filepath,
           ]);
           python.stdout.on("data", function (data) {
-            console.log(data.toString())
-            res.render("createPost", { caption: data.toString() });
+            cook["caption"] = data.toString();
+            res.cookie("image", cook);
+            console.log(data.toString());
+            res.render("createPost", {
+              path: filepath.slice(7),
+              caption: data.toString(),
+            });
+            return;
           });
         } else {
-          console.log('no')
+          console.log("error");
         }
       }
     });
   }
 });
 
-app.post('/classify',(req,res)=>{
+app.post("/classify", (req, res) => {
   if (req.cookies.id) {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
@@ -316,7 +322,6 @@ app.post('/classify',(req,res)=>{
             filepath,
           ]);
           python.stdout.on("data", function (data) {
-            res.cookie()
             res.render("createPost", { caption: data.toString() });
           });
         } else {
@@ -327,7 +332,53 @@ app.post('/classify',(req,res)=>{
   }
 });
 
+app.get("/msg", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
 
+      if (err) res.render("login");
+      else {
+        var chat = user.chat;
+        console.log(chat);
+        // for (let i = 0; i < chat.length; i++) {
+
+        // }
+        // console.log(chat[1]['message']);
+        // var text=chat[l-1]['message'];
+        // res.send
+        res.render("message", { message: chat });
+      }
+    });
+  }
+});
+
+app.post("/sendmessage", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
+
+      if (err) res.render("login");
+      else {
+        var text = req.body.text;
+        user.chat.push({
+          text: text,
+        });
+        res.render("home", { user: user });
+
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
+        var chat=user.chat;
+        console.log(chat)
+        res.render('message',{message:chat});
+
+
+  }
+});
+  }})
 
 app.listen(3000, function () {
   console.log("listening on 3000");

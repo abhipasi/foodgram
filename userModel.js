@@ -66,6 +66,18 @@ const UserSchema = new mongoose.Schema({
         default: Date.now
       }
     }
+  ],
+  chat:[
+    {
+      userid:String,
+      message:[{
+        content:String,
+        time:{
+          type: Date,
+          default: Date.now
+        }
+      }]
+    }
   ]
   //  cart: [{name: String, price: String}]
 

@@ -101,11 +101,14 @@
        
         <div class="footer-chat">
           <i class="" style="font-size:25pt;" aria-hidden="true"></i>
-          <input type="text" class="write-message" placeholder="Type your message here"></input>
+          <form action="/sendmessage" method="post">
+          <input type="text"  name="text" class="write-message" placeholder="Type your message here"></input>
          <i class="uil uil-message"></i>
         </div>
          </div>
       </div>
+
+    </form>
       <div class="right">
         <div class="messages">
           <div class="heading">

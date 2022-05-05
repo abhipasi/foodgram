@@ -66,6 +66,7 @@
         </div>
         <!--right-->
         <div class="right">
+         
           <% if(typeof(path) == 'undefined') { %>
           <form action="/addimage" method="post" enctype="multipart/form-data">
           <div class="messages">
@@ -88,6 +89,7 @@
             </form>
             <%}%>
            <% if(typeof(path) != 'undefined') {%>
+            
             <div class="messages">
               
               <div class="preview2">
@@ -97,14 +99,13 @@
               <div class="message-body">
                 <div class="action">
                   <% if (typeof(caption)!='undefined'){%>
-                  <p class="image-cap1"><%=caption%>></p>
+                  <p class="image-cap1"><%=caption%></p>
                   <%}%>
                   <p class="image-cap-another">Image Another caption</p>
                   <p class="image-cap-crawled">Image caption Crawled</p>
                   <input type="text" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
-                    
                   <button class="btn btn-primary" onclick="display()" id="generate-caption">
                       Generate Caption
                   </button>
