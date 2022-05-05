@@ -30,8 +30,7 @@ app.get("/", (req, res) => {
 
       if (err) console.log(err);
       else {
-        res.redirect('/home')
-
+        res.redirect("/home");
       }
     });
   } else {
@@ -70,7 +69,7 @@ app.post("/", (req, res) => {
 
           //   return success response
           res.cookie("id", user._id);
-          res.redirect('/home')
+          res.redirect("/home");
         })
         // catch error if password do not match
         .catch((error) => {
@@ -162,25 +161,27 @@ app.get("/home", (req, res) => {
       if (err) res.render("login");
       else {
         let reqs = [];
-        var bar = new Promise((resolve, reject) => {
-        user.requests.forEach(function(singleUser,index,array) {
-          User.find({ _id: singleUser.userid }, function (err, user) {
-            if(err) console.log(err);
-            else {
-              reqs.push(user[0]);
-              if (index === array.length -1) resolve();
-              return reqs;
-
-              
-            }
+        if (user.requests.length != 0) {
+          var bar = new Promise((resolve, reject) => {
+            user.requests.forEach(function (singleUser, index, array) {
+              User.find({ _id: singleUser.userid }, function (err, user) {
+                if (err) console.log(err);
+                else {
+                  reqs.push(user[0]);
+                  console.log(array.length);
+                  if (index === array.length - 1) resolve();
+                  return reqs;
+                }
+              });
+            });
           });
-        })
-      })
-        bar.then(()=>{
-       console.log('req',reqs.length);
-      res.render("home", { user: user,requests:reqs });
-      })
-        
+          bar.then(() => {
+            //  console.log('req',reqs.length);
+            res.render("home", { user: user, requests: reqs });
+          });
+        } else {
+          res.render("home", { user: user, requests: [] });
+        }
       }
     });
   } else {
@@ -199,7 +200,7 @@ app.post("/addpost", (req, res) => {
         user.textpost.push({
           text: text,
         });
-        res.redirect('/home')
+        res.redirect("/home");
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -260,7 +261,8 @@ app.get("/createpost", (req, res) => {
       }
     });
   }
-});0
+});
+0;
 app.get("/profile", (req, res) => {
   if (req.cookies.id) {
     const id = req.cookies.id;
@@ -412,7 +414,7 @@ app.post("/sendmessage", (req, res) => {
         user.chat.push({
           text: text,
         });
-        res.redirect('/home')
+        res.redirect("/home");
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -436,20 +438,49 @@ app.post("/post", (req, res) => {
         image = req.cookies.image;
         console.log(image);
         user.post.push({
-          img: image['file'],
-          generatedcaption: image['caption'],
-          crawledcaption: image['caption2'],
-          usercaption: image['usercaption'],
-          finalcaption:image['caption2'] ,
-          class: image['class'],
-          location: image['location'],
+          img: image["file"],
+          generatedcaption: image["caption"],
+          crawledcaption: image["caption2"],
+          usercaption: image["usercaption"],
+          finalcaption: image["caption2"],
+          class: image["class"],
+          location: image["location"],
         });
         res.clearCookie("image");
-        res.redirect('/home');
+        res.redirect("/home");
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("data added");
         });
+      }
+    });
+  }
+});
+
+app.post("/delete", (req, res) => {
+  const delPost = req.body.deletePost;
+  User.findOne({ _id: delPost }, function (err, user) {
+    if (err) res.render("login");
+    else {
+      console.log("del");
+    }
+  });
+});
+
+app.get("/req", (req, res) => {
+  // console.log(req.params.topic);
+  const postId = req.query.accept;
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      if (!err) {
+        user.followers.push({
+          userid: postId,
+        });
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
+        res.redirect("/home");
       }
     });
   }

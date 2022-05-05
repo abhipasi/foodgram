@@ -189,6 +189,7 @@
                        
 
                     </div> -->
+                    <%  user.chat.map(function(elem) {%>
                     <div class="message">
                         <div class="profile-picture">
                             <img
@@ -198,31 +199,20 @@
                             
                           />
                         </div>
+                        
                         <div class="message-body">
-                            <a href="./msg">
-                               
-                            <h5>Siddhi</h5>
-                            <p class="text-muted">hey how u doin?</p>
+                            
+                            <a href="./msg?userid=<%=elem.userid%>">
+                               <%console.log(elem.userid)%>
+                            <h5><%=elem.name%></h5>
+                            <%  elem.message.map(function(msg) {%>
+                            <p class="text-muted"><%=(msg.content)%></p>
+                            <%})%>
                             </a>
                         </div>
                     </div>
-                    <div class="message">
-                        <div class="profile-picture">
-                            <img
-                            
-                            src="./Images/prof2.jpg"
-                            alt="logo"
-                            
-                          />
-                        </div>
-                        <div class="message-body">
-                            <a href="./msg">
-                            <h5>Dhruv</h5>
-                            
-                            <p class="text-muted">okay.</p>
-                            </a>
-                        </div>
-                    </div>
+                    <% }) %>
+                    
                     </div>
                     <!--Requests-->
                     <div class="friend-requests">
@@ -249,12 +239,10 @@
                                 </div>
                             </div>
                                 <div class="action">
-                                    <button class="btn btn-primary">
-                                        Accept
-                                    </button>
-                                    <button class="btn">
-                                       Decline
-                                    </button>
+                                    <a href="/req?accept=<%=requests[i]._id%>" class="btn btn-primary">Accept</a>
+                                    <form action="/delete" method="POST" class="delete">
+                                    <button type="submit" class="btn" name="deletePost" value=<%=requests[i]._id%>> Decline</button>
+                                    </form>
                                 </div>
                             </div>
                             <% } %>

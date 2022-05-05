@@ -81,6 +81,7 @@ const UserSchema = new mongoose.Schema({
   chat:[
     {
       userid:String,
+      name:String,
       message:[{
         sent:Boolean,
         content:String,
@@ -90,9 +91,9 @@ const UserSchema = new mongoose.Schema({
         }
       }]
     }
-  ]
+  ],
   //  cart: [{name: String, price: String}]
-
+cuisine:String
 });
 // export UserSchema
 module.exports = mongoose.model.Users || mongoose.model("Users", UserSchema);
