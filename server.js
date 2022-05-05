@@ -186,6 +186,7 @@ app.get("/home", (req, res) => {
   } else {
     res.render("login");
   }
+
 });
 app.post("/addpost", (req, res) => {
   if (req.cookies.id) {
@@ -468,9 +469,9 @@ app.post('/delete',(req,res)=>{
   
   });
 
-  app.get('/req/:reqId',(req,res)=>{
+  app.get('/req',(req,res)=>{
     // console.log(req.params.topic);
-    const postId=(req.params.reqtId);
+    const postId=(req.query.accept);
     if (req.cookies.id) {
       const id = req.cookies.id;
       User.findOne({ _id: id }, function (err, user) {
