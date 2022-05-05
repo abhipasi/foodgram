@@ -161,6 +161,7 @@ app.get("/home", (req, res) => {
       if (err) res.render("login");
       else {
         let reqs = [];
+        let follow=[];
         if (user.requests.length != 0) {
           var bar = new Promise((resolve, reject) => {
             user.requests.forEach(function (singleUser, index, array) {
@@ -174,13 +175,25 @@ app.get("/home", (req, res) => {
                 }
               });
             });
+            user.followers.forEach(function(follower,index,array){
+              User.find({ _id: follower.userid }, function (err, user) {
+                if (err) console.log(err);
+                else {
+                  follow.push(user[0]);
+                  console.log(array.length);
+                  if (index === array.length - 1) resolve();
+                  return follow;
+                }
+              });
+            })
           });
           bar.then(() => {
             //  console.log('req',reqs.length);
-            res.render("home", { user: user, requests: reqs });
+            console.log('folloe,',follow);
+            res.render("home", { user: user, requests: reqs,follow:follow });
           });
         } else {
-          res.render("home", { user: user, requests: [] });
+          res.render("home", { user: user, requests: [] ,follow:[]});
         }
       }
     });
@@ -482,6 +495,7 @@ app.get("/req", (req, res) => {
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
+        
         res.redirect("/home");
       }
     });
