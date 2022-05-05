@@ -69,19 +69,23 @@
         <!--right-->
         
         <div class="middle">
-          <h3>What Do You Want To Eat Today?</h3>
+          <% if(typeof(prof) == 'undefined') {%>
+          <h3>What Do You Feel Like Eating Today?</h3>
+          <form action="/cuisine" method="post">
           <div class="cuisine">
-          <button class="big-button">Chinese</button>
-          <button class="big-button">Italian</button>
-          <button class="big-button">Mexican</button>
-          <button class="big-button">Indian</button>
-          <button class="big-button">Mexican</button>
+          <button class="big-button" name="cuisine" value=chinese>Chinese</button>
+          <button class="big-button" name="cuisine" value=italian>Italian</button>
+          <button class="big-button" name="cuisine" value=mexican>Mexican</button>
+          <button class="big-button" name="cuisine" value=indian>Indian</button>
+          <button class="big-button" name="cuisine" value=japanese>Japanese</button>
        
          </div> 
-       
+         </form>
+         <%}%>
+         <% if(typeof(prof) != 'undefined') {%>
         <div class="card-container">
           
-  
+          <%  prof.map(function(elem) {%>
           <div class="card">
             <div>
               <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="girl">
@@ -89,63 +93,19 @@
              <div class="author">
                  <div class="profile"></div>
                  <div class="info">
-                     <div class="name">Juliana Hose</div>
+                     <div class="name"><%=elem.name%></div>
                  </div>
                  
                  <div> <button class="btn btn-primary">Follow</button></div>
              </div>
          </div>
-         <div class="card">
-          <div>
-            <img src="https://media.istockphoto.com/photos/pleasant-young-indian-woman-freelancer-consult-client-via-video-call-picture-id1300972573?k=20&m=1300972573&s=612x612&w=0&h=Tiwi8Y0q8FBg8nL0i5GL_GslELTVLKkEB2e6m63Jlcg=" alt="girl">
-          </div>
-           <div class="author">
-               <div class="profile"></div>
-               <div class="info">
-                   <div class="name">Venessa Parker</div>
-               </div>
-           </div>
-           <div> <button class="btn btn-primary">Follow</button></div>
-       </div>
-       <div class="card">
-        <div>
-          <img src="https://st3.depositphotos.com/1037987/15097/i/600/depositphotos_150975580-stock-photo-portrait-of-businesswoman-in-office.jpg" alt="girl">
-        </div>
-         <div class="author">
-             <div class="profile"></div>
-             <div class="info">
-                 <div class="name">Candice Mendes</div>
-             </div>
-         </div>
-         <div> <button class="btn btn-primary">Follow</button></div>
-     </div>
-     <div class="card">
-      <div>
-        <img src="https://www.incimages.com/uploaded_files/image/1920x1080/getty_481292845_77896.jpg" alt="girl">
-      </div>
-       <div class="author">
-           <div class="profile"></div>
-           <div class="info">
-               <div class="name">David Holland</div>
-           </div>
-       </div>
-       <div> <button class="btn btn-primary">Follow</button></div>
-   </div>
-   <div class="card">
-    <div>
-      <img src="https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcT2r9EI_bZeNedCfy4_dQwchoXYSQ7UmSpnUcINAMan6Rp0o_E36-Wgaepkk_eaOrFzO4M&usqp=CAU" alt="girl">
-    </div>
-     <div class="author">
-         <div class="profile"></div>
-         <div class="info">
-             <div class="name">Peter Kevinsky</div>
-         </div>
-     </div>
-     <div> <button class="btn btn-primary">Follow</button></div>
- </div>
+         <% }) %>
+         
+       
           
   
       </div>
+      <%}%>
       </div>
     </main>
 

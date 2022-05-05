@@ -486,6 +486,20 @@ app.get("/req", (req, res) => {
   }
 });
 
+app.post('/cuisine', (req, res) => {
+  const cuis = req.body.cuisine;
+  // console.log(cuis);
+ 
+    User.find({ cuisine : cuis }, function (err, user) {
+      if(!err){
+     res.render('findBuddy',{prof:user});
+      }
+    })
+  
+  
+});
+
+
 app.listen(3000, function () {
   console.log("listening on 3000");
 });
