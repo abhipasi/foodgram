@@ -627,3 +627,6 @@ body {
     transform: translateX(130px);
 }
 
+.cuisine{
+    display:flex;
+}
