@@ -1,0 +1,306 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Document</title>
+    
+    <link rel="stylesheet" href="https://unicons.iconscout.com/release/v4.0.0/css/line.css">
+    <link rel="stylesheet" href="css/style.css">
+    
+   
+    
+
+</head>
+<body>
+    <nav>
+        <div class="container">
+            <h2 class="logo">
+                Foodogram
+            </h2>
+            <div class="search-bar">
+                <i class="uil uil-search"></i>
+                <input type="text" placeholder="Search for recipes, ingredients and more">
+            </div>
+            <div class="create">
+                <label class="btn btn-primary" for="create-post">
+                   <a href="/createpost"> <span>Create </span></a>
+                    </label>
+                    <div class="profile-picture">
+                        <img
+                        
+                        src="./Images/profile.jpg"
+                        alt="logo"
+                        
+                      />
+                    </div>
+            </div>
+        </div>
+    </nav>
+    <!---main-->
+    <main>
+        <div class="container">
+            <!--Leftbox-->
+            <div class="left">
+                <a href="" class="profile">
+                    <div class="profile-picture">
+                        <img
+                        
+                        src="./Images/profile.jpg"
+                        alt="logo"
+                        
+                      />
+                    </div>
+                    
+                      <div class="handle">
+                        <h3><%=user.username%></h3>
+                        <!-- <p class="text-muted">@<%=user.username%></p> -->
+                      </div>
+                    
+                </a>
+                <!--sidebar-->
+                <div class="sidebar">
+                  <a href="/home" class="menu-item active">
+                      <span> <i class="uil uil-home"></i></span><h3>Home</h3>
+                    </a>
+                    <a  class="menu-item" id="message-notification">
+                      <span> <i class="uil uil-message" ></i></span><h3>Messages</h3>
+                    </a>
+                    <a href="/findmybuddy" class="menu-item">
+                      <span> <i class="uil uil-users-alt"></i></span><h3>Find My Buddy</h3>
+
+                  </a>  
+                  <label for="create-post" class=" btn btn-primary"><a href="/createpost">Create Post</a></label>
+                </div>
+
+            </div>
+            <!--center-->
+            <div class="middle">
+                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ridiculus mus mauris vitae ultricies leo. Tempus urna et pharetra pharetra massa massa ultricies. Elementum nibh tellus molestie nunc non blandit massa. Proin sagittis nisl rhoncus mattis rhoncus urna. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Venenatis cras sed felis eget velit. Quisque sagittis purus sit amet volutpat consequat mauris. Viverra mauris in aliquam sem fringilla ut morbi tincidunt. In aliquam sem fringilla ut. At urna condimentum mattis pellentesque id nibh tortor id. -->
+                <!--  -->
+                <form class="create-post" action="/addpost" method="post">
+                    <div class="profile-picture">
+                        <img
+                        
+                        src="./Images/profile.jpg"
+                        alt="logo"
+                        
+                      />
+                    </div>
+                    <input type="text" placeholder="What's on your mind?" id="'create post" name="text">
+                    <input type="submit" value="Post" class="btn btn-primary">
+                </form>
+                <!--FEED-->
+                <div class="feeds">
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-picture">
+                                    <img
+                                    
+                                    src="./Images/prof2.jpg"
+                                    alt="logo"
+                                    
+                                  />
+                                </div>
+                                <div class="ingo">
+                                    <h3>Dhruv</h3>
+                                    <small>Dubai, 15 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                    
+                    <div class = "photo">
+                        <img src="./Images/burg.jpg" alt="">
+                    </div>
+                    <div class = "action-button">
+                        <div class="interactive-button">
+                            <span><i class="uil uil-heart"></i></span>
+                            <p>Liked by 2</p>
+                        </div>
+                           
+                    </div>
+                   
+                    <div class="caption">
+                        <p><span><b>Dhruv</b></span>
+                             Burgers are my favorite food group </p>
+                    </div>
+                </div>
+                <div class="feed">
+                    <div class="head">
+                        <div class="user">
+                            <div class="profile-picture">
+                                <img
+                                
+                                src="./Images/profimg.jpg"
+                                alt="logo"
+                                
+                              />
+                            </div>
+                            <div class="ingo">
+                                <h3>Siddhi</h3>
+                                <small>Mumbai, 1 DAY AGO</small>
+                            </div>
+                        </div>
+                        
+                       
+                    </div>
+                
+                <div class = "photo">
+                    <img src="./Images/Foodogram.png" alt="">
+                </div>
+                <div class = "action-button">
+                    <div class="interactive-button">
+                        <span><i class="uil uil-heart"></i></span>
+                        <p>Liked by 5</p>
+                    </div>
+                       
+                </div>
+                
+                <div class="caption">
+                    <p><b>Siddhi</b> Love the new app "Foodogram" </p>
+                </div>
+            </div>
+            </div>
+            </div>
+            <!--right-->
+            <div class="right">
+                <!-- Lorem ipsum dolor sit amet, consectetur adipiscing elit, sed do eiusmod tempor incididunt ut labore et dolore magna aliqua. Ridiculus mus mauris vitae ultricies leo. Tempus urna et pharetra pharetra massa massa ultricies. Elementum nibh tellus molestie nunc non blandit massa. Proin sagittis nisl rhoncus mattis rhoncus urna. Massa tincidunt nunc pulvinar sapien et ligula ullamcorper malesuada proin. Venenatis cras sed felis eget velit. Quisque sagittis purus sit amet volutpat consequat  -->
+                <div class="messages">
+                    <div class="heading">
+                        <h4>
+                            Messages
+                        </h4>
+                        <i class="uil uil-edit"></i>
+                    </div>
+                    <!--Searchbar-->
+                    <div class="search-bar">
+                        <i class="uil uil-search"></i>
+                        <input type="text" placeholder="Search Messages" id="message-search" class="search-input">
+                        
+                    </div>
+                    
+                    <!-- <div class="category">
+                        <h6 class="active">Primary</h6>
+                        
+                       
+
+                    </div> -->
+                    <div class="message">
+                        <div class="profile-picture">
+                            <img
+                            
+                            src="./Images/profimg.jpg"
+                            alt="logo"
+                            
+                          />
+                        </div>
+                        <div class="message-body">
+                            <a href="./msg">
+                               
+                            <h5>Siddhi</h5>
+                            <p class="text-muted">hey how u doin?</p>
+                            </a>
+                        </div>
+                    </div>
+                    <div class="message">
+                        <div class="profile-picture">
+                            <img
+                            
+                            src="./Images/prof2.jpg"
+                            alt="logo"
+                            
+                          />
+                        </div>
+                        <div class="message-body">
+                            <a href="./msg">
+                            <h5>Dhruv</h5>
+                            
+                            <p class="text-muted">okay.</p>
+                            </a>
+                        </div>
+                    </div>
+                    </div>
+                    <!--Requests-->
+                    <div class="friend-requests">
+                        <h4>REQUESTS</h4>
+                       
+                        <% for(var i=0; i<requests.length; i++) { %>
+                            
+                        <div class="request">
+                           
+                            <div class="info">
+                                <div class="profile-picture">
+                                <img
+                                
+                                src="./Images/prof3.jpg"
+                                alt="logo"
+                                
+                              />
+                            </div>
+                            <div>
+                                <h5><%= requests[i].name %></h5>
+                                <!-- <p class="text-muted">
+                                    Lorem-ipsum
+                                </p> -->
+                                </div>
+                            </div>
+                                <div class="action">
+                                    <button class="btn btn-primary">
+                                        Accept
+                                    </button>
+                                    <button class="btn">
+                                       Decline
+                                    </button>
+                                </div>
+                            </div>
+                            <% } %>
+                           
+                        </div>
+                       
+                    </div>
+                
+            </div>
+            
+
+        </div>
+    </main>
+
+    <!-- <script src="./index.js"></script> -->
+
+    <script type="text/javascript">
+        //Sidebar
+const menuItems=document.querySelectorAll('.menu-item');
+
+const changeActiveItem=()=>{
+    menuItems.forEach(item=>{
+        item.classList.remove('active');
+    });
+}
+
+menuItems.forEach(item=>{
+    item.addEventListener('click',()=>{
+        changeActiveItem();
+        item.classList.add('active');
+      
+    });
+})
+
+//messages
+const message=document.querySelector('.messages');
+const messageNotification=document.querySelector('#message-notification');
+
+messageNotification.addEventListener('click',()=>{
+    message.style.boxShadow='0 0 1rem var(--color-primary)';
+    setTimeout(()=>{
+        message.style.boxShadow='none';
+    },2000);
+});
+
+
+    </script>
+</body>
+</html>
