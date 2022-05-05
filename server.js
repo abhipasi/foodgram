@@ -392,6 +392,8 @@ app.get("/msg", (req, res) => {
         var id=req.query.userid
         var msg = chat.find(({ userid }) => userid === req.query.userid);
         console.log('msg',msg.message,id)
+        
+        res.cookie('oppuser',id)
         res.render("message", { message: msg.message, id: id });
       }
     });
@@ -406,21 +408,21 @@ app.post("/sendmessage", (req, res) => {
 
       if (err) res.render("login");
       else {
-        var oppuser = req.body.userid;
+        var oppuser = req.cookies.oppuser;
+        console.log(oppuser)
         var text = req.body.text;
         chat = user.chat;
         var msg = chat.find(({ userid }) => userid === oppuser);
-        console.log(msg)
+        console.log('n',msg.message)
 
-        // user.chat.message.push({
-        //   content: text,
+        msg.message.push({
+          content: text,
+          sent:true
 
-        // });
-        // user.save(function (err) {
-        //   err != null ? console.log(err) : console.log("Data updated");
-        // });
-        var chat = user.chat;
-        console.log(chat);
+        });
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
         res.render("message", { message: chat });
       }
     });
