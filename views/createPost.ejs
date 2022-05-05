@@ -102,24 +102,27 @@
                   <p class="image-cap1"><%=caption%></p>
                   <%}%>
                   <% if(typeof(captioncrawl) != 'undefined') {%>
+                    <h3><%=classify%></h3>
                   <p class="image-cap-crawled"><%=captioncrawl%></p>
+                  
                   <%}%>
+                 
                   <input type="text" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
-                  <button class="btn btn-primary" onclick="display()" id="generate-caption">
+                  <button class="btn btn-primary" id="generate-caption">
                       Generate Caption
                   </button>
                </form>
                
               <form action="/classify" method="post">
               
-                <button class="btn btn-primary" onclick="displayCrawled()" id="generate-caption-ig">
+                <button class="btn btn-primary"  id="generate-caption-ig">
                 Not Impressed? Use our Caption Crawler 
               </button>
            </form>
             </div>
-                  <label class="btn" id="write-caption" onclick="displayManual()">
+                  <label class="btn" id="write-caption" onClick="displayManual()">
                      Write your caption
                   </label>
                  
@@ -157,10 +160,11 @@
   
 }
 function displayManual(){
-  document.getElementsByClassName('image-cap2').style.display='block';
+  document.getElementsByClassName("image-cap2")[0].style.display = "block";
+  document.getElementById("write-caption").style.display = "none";
+  document.getElementById("generate-caption").style.display = "none";
+  document.getElementById("generate-caption-ig").style.display = "none";
 }
-
-
 
 </script>
 </html>
