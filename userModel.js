@@ -82,6 +82,7 @@ const UserSchema = new mongoose.Schema({
     {
       userid:String,
       message:[{
+        sent:Boolean,
         content:String,
         time:{
           type: Date,

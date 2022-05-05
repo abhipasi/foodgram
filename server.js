@@ -260,6 +260,19 @@ app.get("/createpost", (req, res) => {
       }
     });
   }
+});0
+app.get("/profile", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
+
+      if (err) res.render("login");
+      else {
+        res.render("profile", { user: user });
+      }
+    });
+  }
 });
 
 // app.post('/createpost',(req,res)=>{
@@ -431,11 +444,11 @@ app.post("/post", (req, res) => {
           class: image['class'],
           location: image['location'],
         });
-        res.redirect('/home')
-        res.clearCookie("key");
+        res.clearCookie("image");
+        res.redirect('/home');
 
         user.save(function (err) {
-          err != null ? console.log(err) : res.clearCookie("image");;
+          err != null ? console.log(err) : console.log("data added");
         });
       }
     });
