@@ -391,7 +391,7 @@ app.get("/msg", (req, res) => {
         console.log(req.query.userid)
         chat=user.chat
         var msg=(chat.find(({ userid }) => userid === req.query.userid ));
-        res.render("message",{message:msg});
+        res.render("message",{message:msg,userid:req.query.userid});
           }
         })        
       }
@@ -409,6 +409,7 @@ app.post("/sendmessage", (req, res) => {
         var text = req.body.text;
         user.chat.push({
           text: text,
+          
         });
         res.redirect("/home");
 
