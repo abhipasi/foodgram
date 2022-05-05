@@ -219,7 +219,7 @@ app.get("/findmybuddy", (req, res) => {
 
       if (err) res.render("login");
       else {
-        res.render("findBuddy",{user:user});
+        res.render("findBuddy", { user: user });
       }
     });
   }
@@ -276,7 +276,7 @@ app.post("/addimage", upload.single("filename"), (req, res, next) => {
           console.log(image);
           res.cookie("image", image);
           const path = `/uploads/${req.file.filename}`;
-          res.render("createPost", { path: path,user:user });
+          res.render("createPost", { path: path, user: user });
           return;
         }
       }
@@ -307,7 +307,7 @@ app.post("/generate", (req, res) => {
             res.render("createPost", {
               path: filepath.slice(7),
               caption: data.toString(),
-              user:user
+              user: user,
             });
             return;
           });
@@ -328,25 +328,29 @@ app.post("/classify", (req, res) => {
       if (err) res.render("login");
       else {
         if (req.cookies.image) {
-          const filepath = req.cookies.image.path;
+          cook = req.cookies.image;
+          const filepath = req.cookies.image["file"];
           console.log(filepath);
           const python = spawn("python", [
             "classification/predict.py",
             filepath,
           ]);
           python.stdout.on("data", function (data) {
-            cook["caption2"] = data.toString();
+            const myArray = data.toString().split("++");
+            cook["caption2"] = myArray[1];
+            cook["class"] = myArray[0];
             res.cookie("image", cook);
-            console.log(data.toString());
+            console.log(myArray[1]);
             res.render("createPost", {
               path: filepath.slice(7),
-              caption: data.toString(),
-              user:user
+              caption: myArray[1],
+              class: myArray[0],
+              user: user,
             });
             return;
           });
         } else {
-          console.log('error');
+          console.log("error");
         }
       }
     });
@@ -392,14 +396,27 @@ app.post("/sendmessage", (req, res) => {
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
-        var chat=user.chat;
-        console.log(chat)
-        res.render('message',{message:chat});
-
-
+        var chat = user.chat;
+        console.log(chat);
+        res.render("message", { message: chat });
+      }
+    });
   }
 });
-  }})
+
+app.post("/post", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
+
+      if (err) res.render("login");
+      else {
+        
+      }
+    })
+  }
+})
 
 app.listen(3000, function () {
   console.log("listening on 3000");
