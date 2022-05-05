@@ -202,7 +202,7 @@
                         
                         <div class="message-body">
                             
-                            <!-- <a href="./msg?userid=<%=user._id%>"> -->
+                            <a href="./msg?userid=<%=elem.userid%>">
                                <%console.log(elem.userid)%>
                             <h5><%=elem.name%></h5>
                             <%  elem.message.map(function(msg) {%>
@@ -212,23 +212,7 @@
                         </div>
                     </div>
                     <% }) %>
-                    <div class="message">
-                        <div class="profile-picture">
-                            <img
-                            
-                            src="./Images/prof2.jpg"
-                            alt="logo"
-                            
-                          />
-                        </div>
-                        <div class="message-body">
-                            <a href="./msg">
-                            <h5>Dhruv</h5>
-                            
-                            <p class="text-muted">okay.</p>
-                            </a>
-                        </div>
-                    </div>
+                    
                     </div>
                     <!--Requests-->
                     <div class="friend-requests">
