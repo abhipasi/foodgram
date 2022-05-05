@@ -98,8 +98,8 @@
             <div class="message" id="imagecap">
               <div class="message-body">
                 <div class="action">
-                  
-                  <p class="image-cap1">cap</p>
+                  <% if(typeof(caption) != 'undefined') {%>
+                  <p class="image-cap1"><%=caption%></p>
                   
                   <p class="image-cap-another">Image Another caption</p>
                   <p class="image-cap-crawled">Image caption Crawled</p>
@@ -134,7 +134,7 @@
               </div>
               </div>
               </div>
-              <%}%>
+              <%}}%>
             </div>
           </form>
           </div>

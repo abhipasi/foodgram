@@ -219,7 +219,7 @@ app.get("/findmybuddy", (req, res) => {
 
       if (err) res.render("login");
       else {
-        res.render("findBuddy");
+        res.render("findBuddy",{user:user});
       }
     });
   }
@@ -276,7 +276,7 @@ app.post("/addimage", upload.single("filename"), (req, res, next) => {
           console.log(image);
           res.cookie("image", image);
           const path = `/uploads/${req.file.filename}`;
-          res.render("createPost", { path: path });
+          res.render("createPost", { path: path,user:user });
           return;
         }
       }
@@ -307,6 +307,7 @@ app.post("/generate", (req, res) => {
             res.render("createPost", {
               path: filepath.slice(7),
               caption: data.toString(),
+              user:user
             });
             return;
           });
@@ -334,10 +335,18 @@ app.post("/classify", (req, res) => {
             filepath,
           ]);
           python.stdout.on("data", function (data) {
-            res.render("createPost", { caption: data.toString() });
+            cook["caption2"] = data.toString();
+            res.cookie("image", cook);
+            console.log(data.toString());
+            res.render("createPost", {
+              path: filepath.slice(7),
+              caption: data.toString(),
+              user:user
+            });
+            return;
           });
         } else {
-          res.render("createpost");
+          console.log('error');
         }
       }
     });
