@@ -236,7 +236,7 @@ app.get("/createpost", (req, res) => {
 
       if (err) res.render("login");
       else {
-        res.render("createPost");
+        res.render("createPost", { user: user });
       }
     });
   }

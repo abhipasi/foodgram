@@ -539,7 +539,7 @@ display: flex;
 
   }
   #generate-caption-another,#generate-caption-ig{
-      display: none;
+     
       margin-bottom:1rem;
       margin-right:0.5rem;
   }
@@ -558,9 +558,9 @@ display: flex;
     padding: var(--search-padding);
   }
 
-  #uploadbtn{
+  /* #uploadbtn{
       display: none;
-  }
+  } */
 #file-ip-1-preview{
     max-width: 100%;
     height: auto;
