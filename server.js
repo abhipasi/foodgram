@@ -157,29 +157,25 @@ app.get("/home", (req, res) => {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
-     
-      
+
       if (err) res.render("login");
       else {
-        let reqs=[]
+        let reqs = [];
         var bar = new Promise((resolve, reject) => {
-        user.requests.forEach(function(singleUser,index,array) {
-          User.find({ _id: singleUser.userid }, function (err, user) {
-            if(err) console.log(err);
-            else {
-              reqs.push(user);
-              if (index === array.length -1) resolve();
-              return reqs;
-
-              
-            }
+          user.requests.forEach(function (singleUser, index, array) {
+            User.find({ _id: singleUser.userid }, function (err, user) {
+              if (err) console.log(err);
+              else {
+                reqs.push(user);
+                if (index === array.length - 1) resolve();
+                return reqs;
+              }
+            });
           });
-        })
-      })
-        bar.then(()=>{
-       console.log('req',reqs);
-      })
-        res.render("home", { user: user ,requests:reqs });
+        });
+        bar.then(() => {
+          res.render("home", { user: user, requests: reqs });
+        });
       }
     });
   } else {
@@ -419,11 +415,26 @@ app.post("/post", (req, res) => {
 
       if (err) res.render("login");
       else {
+        image = req.cookies.image;
+        console.log(image);
+        user.post.push({
+          img: image['file'],
+          generatedcaption: image['caption'],
+          crawledcaption: image['caption2'],
+          usercaption: image['usercaption'],
+          finalcaption:image['caption2'] ,
+          class: image['class'],
+          location: image['location'],
+        });
+        res.render("home", { user: user });
 
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
       }
-    })
+    });
   }
-})
+});
 
 app.listen(3000, function () {
   console.log("listening on 3000");
