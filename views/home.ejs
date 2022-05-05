@@ -227,7 +227,10 @@
                     <!--Requests-->
                     <div class="friend-requests">
                         <h4>REQUESTS</h4>
+                        <%console.log(requests)%>
+                        <% requests.forEach(function(row){ %>
                         <div class="request">
+                           
                             <div class="info">
                                 <div class="profile-picture">
                                 <img
@@ -238,7 +241,7 @@
                               />
                             </div>
                             <div>
-                                <h5>Jan</h5>
+                                <h5>row.name</h5>
                                 <!-- <p class="text-muted">
                                     Lorem-ipsum
                                 </p> -->
@@ -253,6 +256,7 @@
                                     </button>
                                 </div>
                             </div>
+                            <%})%>
                             <div class="request">
                                 <div class="info">
                                     <div class="profile-picture">

@@ -157,10 +157,22 @@ app.get("/home", (req, res) => {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
-
+     
+      
       if (err) res.render("login");
       else {
-        res.render("home", { user: user });
+        reqs=[]
+        user.requests.forEach(function(singleUser) {
+          User.find({ _id: singleUser.userid }, function (err, user) {
+            if(err) console.log(err);
+            else {
+              reqs.push(user)
+              
+            }
+          });
+        })
+       console.log(reqs);
+        res.render("home", { user: user ,requests:reqs });
       }
     });
   } else {
