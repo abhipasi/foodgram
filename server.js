@@ -388,15 +388,15 @@ app.get("/msg", (req, res) => {
 
       if (err) res.render("login");
       else {
-        console.log(req.query.userid)
-        chat=user.chat
-        var msg=(chat.find(({ userid }) => userid === req.query.userid ));
-        res.render("message",{message:msg,userid:req.query.userid});
-          }
-        })        
+        chat = user.chat;
+        var id=req.query.userid
+        var msg = chat.find(({ userid }) => userid === req.query.userid);
+        console.log('msg',msg.message,id)
+        res.render("message", { message: msg.message, id: id });
       }
     });
-
+  }
+});
 
 app.post("/sendmessage", (req, res) => {
   if (req.cookies.id) {
@@ -407,11 +407,14 @@ app.post("/sendmessage", (req, res) => {
       if (err) res.render("login");
       else {
         var oppuser = req.body.userid;
-        var text=req.body.text;
-        console.log(oppuser,text)
-        // user.chat.push({
-        //   text: text,
-          
+        var text = req.body.text;
+        chat = user.chat;
+        var msg = chat.find(({ userid }) => userid === oppuser);
+        console.log(msg)
+
+        // user.chat.message.push({
+        //   content: text,
+
         // });
         // user.save(function (err) {
         //   err != null ? console.log(err) : console.log("Data updated");
@@ -483,35 +486,15 @@ app.get("/req", (req, res) => {
   }
 });
 
-app.post('/cuisine', (req, res) => {
+app.post("/cuisine", (req, res) => {
   const cuis = req.body.cuisine;
   // console.log(cuis);
- 
-    User.find({ cuisine : cuis }, function (err, user) {
-      if(!err){
-     res.render('findBuddy',{prof:user});
-      }
-    })
-  
-  
-});
-app.get("/follow", (req, res) => {
-  // console.log(req.params.topic);
-  const postId = req.query.userid;
-  if (req.cookies.id) {
-    const id = req.cookies.id;
-    User.findOne({ _id: postId }, function (err, user) {
-      if (!err) {
-        user.requests.push({
-          userid: id,
-        });
-        user.save(function (err) {
-          err != null ? console.log(err) : console.log("Data updated");
-        });
-        res.redirect("/home");
-      }
-    });
-  }
+
+  User.find({ cuisine: cuis }, function (err, user) {
+    if (!err) {
+      res.render("findBuddy", { prof: user });
+    }
+  });
 });
 
 app.listen(3000, function () {
