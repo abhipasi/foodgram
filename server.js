@@ -352,7 +352,7 @@ app.post("/classify", (req, res) => {
             res.render("createPost", {
               path: filepath.slice(7),
               captioncrawl: myArray[1],
-              class: myArray[0],
+              classify: myArray[0],
               user: user,
             });
             return;
