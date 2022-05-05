@@ -167,7 +167,7 @@ app.get("/home", (req, res) => {
           User.find({ _id: singleUser.userid }, function (err, user) {
             if(err) console.log(err);
             else {
-              reqs.push(user);
+              reqs.push(user[0]);
               if (index === array.length -1) resolve();
               return reqs;
 
@@ -177,9 +177,10 @@ app.get("/home", (req, res) => {
         })
       })
         bar.then(()=>{
-       console.log('req',reqs);
+       console.log('req',reqs.length);
+      res.render("home", { user: user ,requests:reqs });
       })
-        res.render("home", { user: user ,requests:reqs });
+        
       }
     });
   } else {
