@@ -406,16 +406,16 @@ app.post("/sendmessage", (req, res) => {
 
       if (err) res.render("login");
       else {
-        var text = req.body.text;
-        user.chat.push({
-          text: text,
+        var oppuser = req.body.userid;
+        var text=req.body.text;
+        console.log(oppuser,text)
+        // user.chat.push({
+        //   text: text,
           
-        });
-        res.redirect("/home");
-
-        user.save(function (err) {
-          err != null ? console.log(err) : console.log("Data updated");
-        });
+        // });
+        // user.save(function (err) {
+        //   err != null ? console.log(err) : console.log("Data updated");
+        // });
         var chat = user.chat;
         console.log(chat);
         res.render("message", { message: chat });
