@@ -30,7 +30,8 @@ app.get("/", (req, res) => {
 
       if (err) console.log(err);
       else {
-        res.render("home", { user: user });
+        res.redirect('/home')
+
       }
     });
   } else {
@@ -69,7 +70,7 @@ app.post("/", (req, res) => {
 
           //   return success response
           res.cookie("id", user._id);
-          res.render("home", { user: user });
+          res.redirect('/home')
         })
         // catch error if password do not match
         .catch((error) => {
@@ -157,11 +158,10 @@ app.get("/home", (req, res) => {
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
-     
-      
+
       if (err) res.render("login");
       else {
-        let reqs=[]
+        let reqs = [];
         var bar = new Promise((resolve, reject) => {
         user.requests.forEach(function(singleUser,index,array) {
           User.find({ _id: singleUser.userid }, function (err, user) {
@@ -178,7 +178,7 @@ app.get("/home", (req, res) => {
       })
         bar.then(()=>{
        console.log('req',reqs.length);
-      res.render("home", { user: user ,requests:reqs });
+      res.render("home", { user: user,requests:reqs });
       })
         
       }
@@ -199,7 +199,7 @@ app.post("/addpost", (req, res) => {
         user.textpost.push({
           text: text,
         });
-        res.render("home", { user: user });
+        res.redirect('/home')
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -399,7 +399,7 @@ app.post("/sendmessage", (req, res) => {
         user.chat.push({
           text: text,
         });
-        res.render("home", { user: user });
+        res.redirect('/home')
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -420,11 +420,27 @@ app.post("/post", (req, res) => {
 
       if (err) res.render("login");
       else {
+        image = req.cookies.image;
+        console.log(image);
+        user.post.push({
+          img: image['file'],
+          generatedcaption: image['caption'],
+          crawledcaption: image['caption2'],
+          usercaption: image['usercaption'],
+          finalcaption:image['caption2'] ,
+          class: image['class'],
+          location: image['location'],
+        });
+        res.redirect('/home')
+        res.clearCookie("key");
 
+        user.save(function (err) {
+          err != null ? console.log(err) : res.clearCookie("image");;
+        });
       }
-    })
+    });
   }
-})
+});
 
 app.listen(3000, function () {
   console.log("listening on 3000");

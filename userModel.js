@@ -45,12 +45,13 @@ const UserSchema = new mongoose.Schema({
   ],
   post:[{
     img:String,
-    generatedcaption1: String,
-    generatedcaption2:String,
+    generatedcaption: String,
+    crawledcaption:String,
     usercaption:String,
     finalcaption:{type:String,
       required:true
     },
+    class:String,
     location:String,
     likes:Number,
     timestamp:{
@@ -58,7 +59,7 @@ const UserSchema = new mongoose.Schema({
       default: Date.now
     }
   }],
-  
+
   requests:[
     {
       userid:String,
