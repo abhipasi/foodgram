@@ -184,7 +184,7 @@ app.get("/home", (req, res) => {
         })
       })
         bar.then(()=>{
-       console.log('req',reqs.length);
+      //  console.log('req',reqs.length);
       res.render("home", { user: user,requests:reqs });
       })
         
