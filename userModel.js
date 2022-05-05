@@ -81,6 +81,7 @@ const UserSchema = new mongoose.Schema({
   chat:[
     {
       userid:String,
+      name:String,
       message:[{
         sent:Boolean,
         content:String,
