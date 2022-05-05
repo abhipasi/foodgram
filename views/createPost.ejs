@@ -100,7 +100,7 @@
                 <div class="action">
                   <% if(typeof(caption) != 'undefined') {%>
                   <p class="image-cap1"><%=caption%></p>
-                  
+                  <%}%>
                   <p class="image-cap-another">Image Another caption</p>
                   <p class="image-cap-crawled">Image caption Crawled</p>
                   <input type="text" class="image-cap2" placeholder="write your own caption">
@@ -128,13 +128,14 @@
                   </label>
                  
               </div>
+              <form action="/post" method="post">
               <div class="submit">
                 <button type="submit" value="Post" class="btn btn-submit">Post</button>
                 
               </div>
               </div>
               </div>
-              <%}}%>
+              <%}%>
             </div>
           </form>
           </div>
