@@ -426,8 +426,6 @@ app.post("/sendmessage", (req, res) => {
         var text = req.body.text;
         chat = user.chat;
         var msg = chat.find(({ userid }) => userid === oppuser);
-        console.log('n',msg.message)
-
         msg.message.push({
           content: text,
           sent:true
@@ -436,7 +434,9 @@ app.post("/sendmessage", (req, res) => {
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
-        res.render("message", { message: chat });
+        var msg = chat.find(({ userid }) => userid === oppuser);
+        console.log(msg)
+        res.render("message", { message: msg });
       }
     });
   }
