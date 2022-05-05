@@ -249,12 +249,10 @@
                                 </div>
                             </div>
                                 <div class="action">
-                                    <button class="btn btn-primary">
-                                        Accept
-                                    </button>
-                                    <button class="btn">
-                                       Decline
-                                    </button>
+                                    <a href="/req/<%=requests[i]._id%>" class="btn btn-primary">Accept</a>
+                                    <form action="/delete" method="POST" class="delete">
+                                    <button type="submit" class="btn" name="deletePost" value=<%=requests[i]._id%>> Decline</button>
+                                    </form>
                                 </div>
                             </div>
                             <% } %>

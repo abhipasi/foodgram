@@ -442,6 +442,38 @@ app.post("/post", (req, res) => {
   }
 });
 
+app.post('/delete',(req,res)=>{
+
+  const delPost=req.body.deletePost;
+  User.findOne({ _id: delPost}, function (err, user) {
+    
+    if (err) res.render("login");
+    else {
+
+    }
+  })
+  
+  });
+
+  app.get('/req/:reqId',(req,res)=>{
+    // console.log(req.params.topic);
+    const postId=(req.params.reqtId);
+    if (req.cookies.id) {
+      const id = req.cookies.id;
+      User.findOne({ _id: id }, function (err, user) {
+        if(!err){
+       user.followers.push(
+         {
+           userid:postId,
+         }
+       )
+       res.redirect('/home')
+   
+  }
+  })}
+  
+  });
+
 app.listen(3000, function () {
   console.log("listening on 3000");
 });
