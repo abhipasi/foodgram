@@ -162,14 +162,21 @@ app.get("/home", (req, res) => {
       if (err) res.render("login");
       else {
         let reqs = [];
+        if(user.requests.length!=0){
+          
         var bar = new Promise((resolve, reject) => {
+          
         user.requests.forEach(function(singleUser,index,array) {
           User.find({ _id: singleUser.userid }, function (err, user) {
+
             if(err) console.log(err);
             else {
               reqs.push(user[0]);
+              console.log(array.length)
               if (index === array.length -1) resolve();
               return reqs;
+              
+      
 
               
             }
@@ -182,6 +189,10 @@ app.get("/home", (req, res) => {
       })
         
       }
+      else{
+        res.render("home", { user: user,requests:[] });
+      }
+    }
     });
   } else {
     res.render("login");
