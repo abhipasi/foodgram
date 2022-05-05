@@ -161,6 +161,7 @@ app.get("/home", (req, res) => {
       if (err) res.render("login");
       else {
         let reqs = [];
+        
         if (user.requests.length != 0) {
           var bar = new Promise((resolve, reject) => {
             user.requests.forEach(function (singleUser, index, array) {
@@ -477,6 +478,7 @@ app.get("/req", (req, res) => {
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
+        
         res.redirect("/home");
       }
     });
