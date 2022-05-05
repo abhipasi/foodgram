@@ -30,7 +30,8 @@ app.get("/", (req, res) => {
 
       if (err) console.log(err);
       else {
-        res.render("home", { user: user });
+        res.redirect('/home')
+
       }
     });
   } else {
@@ -69,7 +70,7 @@ app.post("/", (req, res) => {
 
           //   return success response
           res.cookie("id", user._id);
-          res.render("home", { user: user });
+          res.redirect('/home')
         })
         // catch error if password do not match
         .catch((error) => {
@@ -177,7 +178,7 @@ app.get("/home", (req, res) => {
       })
         bar.then(()=>{
        console.log('req',reqs.length);
-      res.render("home", { user: user ,requests:reqs });
+      res.render("home", { user: user,requests:reqs });
       })
         
       }
@@ -198,7 +199,7 @@ app.post("/addpost", (req, res) => {
         user.textpost.push({
           text: text,
         });
-        res.render("home", { user: user });
+        res.redirect('/home')
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -398,7 +399,7 @@ app.post("/sendmessage", (req, res) => {
         user.chat.push({
           text: text,
         });
-        res.render("home", { user: user });
+        res.redirect('/home')
 
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
@@ -430,10 +431,11 @@ app.post("/post", (req, res) => {
           class: image['class'],
           location: image['location'],
         });
-        res.render("home", { user: user });
+        res.redirect('/home')
+        res.clearCookie("key");
 
         user.save(function (err) {
-          err != null ? console.log(err) : console.log("Data updated");
+          err != null ? console.log(err) : res.clearCookie("image");;
         });
       }
     });
