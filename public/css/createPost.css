@@ -395,9 +395,9 @@ display: flex;
 }
 
 /*image-caption*/
-.image-cap1,.image-cap2,.image-cap-crawled,.image-cap-another{
+/* .image-cap1,.image-cap2,.image-cap-crawled,.image-cap-another{
     display:none;
-}
+} */
 #edit{
     display:none;
 }
@@ -538,11 +538,7 @@ display: flex;
       text-align: center;
 
   }
-  #generate-caption-another,#generate-caption-ig{
-     
-      margin-bottom:1rem;
-      margin-right:0.5rem;
-  }
+ 
 
   .buttons{
       display: flex;
@@ -575,4 +571,10 @@ display: flex;
     width:30em;
     
     padding: 20px;
+}
+.image-cap2{
+    display: none;
+}
+#generate-caption{
+    margin-right: 2rem;
 }

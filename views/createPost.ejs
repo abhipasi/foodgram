@@ -43,7 +43,7 @@
               <img src="./Images/profile.jpg" alt="logo" />
             </div>
             <div class="handle">
-             
+             <h3><%=user.username%></h3>
               <!-- <p class="text-muted">@username</p> -->
             </div>
           </a>
@@ -101,8 +101,9 @@
                   <% if(typeof(caption) != 'undefined') {%>
                   <p class="image-cap1"><%=caption%></p>
                   <%}%>
-                  <p class="image-cap-another">Image Another caption</p>
-                  <p class="image-cap-crawled">Image caption Crawled</p>
+                  <% if(typeof(captioncrawl) != 'undefined') {%>
+                  <p class="image-cap-crawled"><%=captioncrawl%></p>
+                  <%}%>
                   <input type="text" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
@@ -110,12 +111,7 @@
                       Generate Caption
                   </button>
                </form>
-                <form action="/generate" method="post">
                
-                  <button class="btn btn-primary" onclick="displayAnother()" id="generate-caption-another">
-                    Generate Another Caption
-               
-              </button></form>
               <form action="/classify" method="post">
               
                 <button class="btn btn-primary" onclick="displayCrawled()" id="generate-caption-ig">
@@ -159,6 +155,9 @@
     document.getElementById("uploadbtn").style.display = "block";
   }
   
+}
+function displayManual(){
+  document.getElementsByClassName('image-cap2').style.display='block';
 }
 
 
