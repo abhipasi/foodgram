@@ -482,6 +482,9 @@ app.post('/delete',(req,res)=>{
            userid:postId,
          }
        )
+       user.save(function (err) {
+        err != null ? console.log(err) : console.log("Data updated");
+      });
        res.redirect('/home')
    
   }
