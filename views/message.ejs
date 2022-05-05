@@ -15,6 +15,8 @@
     
   </head>
   <body>
+    <%=message%>
+
     <nav>
       <div class="container">
         <h2 class="logo">Foodogram</h2>
@@ -98,16 +100,13 @@
   <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
   <span class="time-left">11:05</span>
 </div>
+
        
         <div class="footer-chat">
           <i class="" style="font-size:25pt;" aria-hidden="true"></i>
           <form action="/sendmessage" method="post">
           <input type="text"  name="text" class="write-message" placeholder="Type your message here"></input>
-
-         
-
-          
-          <input type="hidden" name="userid" value="<%=userid%>">
+          <input type="hidden" name="userid" value="id">
           <button type='submit'><i class="uil uil-message"></i></button>
          
         </div>
