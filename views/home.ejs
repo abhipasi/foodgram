@@ -189,6 +189,7 @@
                        
 
                     </div> -->
+                    <%  user.chat.map(function(elem) {%>
                     <div class="message">
                         <div class="profile-picture">
                             <img
@@ -198,15 +199,19 @@
                             
                           />
                         </div>
+                        
                         <div class="message-body">
                             
-                            <a href="./msg?userid=<%=user._id%>">
-                               
-                            <h5>Siddhi</h5>
-                            <p class="text-muted">hey how u doin?</p>
+                            <!-- <a href="./msg?userid=<%=user._id%>"> -->
+                               <%console.log(elem.name)%>
+                            <h5><%=elem.name%></h5>
+                            <%  elem.message.map(function(msg) {%>
+                            <p class="text-muted"><%=(msg.content)%></p>
+                            <%})%>
                             </a>
                         </div>
                     </div>
+                    <% }) %>
                     <div class="message">
                         <div class="profile-picture">
                             <img
