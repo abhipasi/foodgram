@@ -388,19 +388,25 @@ app.get("/msg", (req, res) => {
 
       if (err) res.render("login");
       else {
-        var chat = user.chat;
-        console.log(chat);
+        console.log(req.query.userid)
+        chat=user.chat
+        console.log(chat)
+        console.log(chat.find(chat.userid===req.query.userid))
+            
+          }
+        })
+        // var chat = user.chat;
+        // console.log(chat);
         // for (let i = 0; i < chat.length; i++) {
 
         // }
         // console.log(chat[1]['message']);
         // var text=chat[l-1]['message'];
         // res.send
-        res.render("message", { message: chat });
+        res.render("message");
       }
     });
-  }
-});
+
 
 app.post("/sendmessage", (req, res) => {
   if (req.cookies.id) {
