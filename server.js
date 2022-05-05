@@ -498,7 +498,24 @@ app.post('/cuisine', (req, res) => {
   
   
 });
-
+app.get("/follow", (req, res) => {
+  // console.log(req.params.topic);
+  const postId = req.query.userid;
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: postId }, function (err, user) {
+      if (!err) {
+        user.requests.push({
+          userid: id,
+        });
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
+        res.redirect("/home");
+      }
+    });
+  }
+});
 
 app.listen(3000, function () {
   console.log("listening on 3000");

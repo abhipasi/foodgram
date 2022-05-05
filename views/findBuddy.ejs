@@ -86,6 +86,7 @@
         <div class="card-container">
           
           <%  prof.map(function(elem) {%>
+            <%console.log(elem)%>
           <div class="card">
             <div>
               <img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?ixlib=rb-1.2.1&ixid=MnwxMjA3fDB8MHxzZWFyY2h8Mnx8cGVyc29ufGVufDB8fDB8fA%3D%3D&w=1000&q=80" alt="girl">
@@ -96,7 +97,7 @@
                      <div class="name"><%=elem.name%></div>
                  </div>
                  
-                 <div> <button class="btn btn-primary">Follow</button></div>
+                 <div> <a href="./follow?userid=<%=elem._id%>" class="btn btn-primary"> Follow</a></div>
              </div>
          </div>
          <% }) %>
