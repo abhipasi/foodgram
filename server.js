@@ -431,11 +431,11 @@ app.post("/post", (req, res) => {
           class: image['class'],
           location: image['location'],
         });
-        res.redirect('/home')
-        res.clearCookie("key");
+        res.clearCookie("image");
+        res.redirect('/home');
 
         user.save(function (err) {
-          err != null ? console.log(err) : res.clearCookie("image");;
+          err != null ? console.log(err) : console.log("data added");
         });
       }
     });
