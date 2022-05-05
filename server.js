@@ -161,17 +161,24 @@ app.get("/home", (req, res) => {
       
       if (err) res.render("login");
       else {
-        reqs=[]
-        user.requests.forEach(function(singleUser) {
+        let reqs=[]
+        var bar = new Promise((resolve, reject) => {
+        user.requests.forEach(function(singleUser,index,array) {
           User.find({ _id: singleUser.userid }, function (err, user) {
             if(err) console.log(err);
             else {
-              reqs.push(user)
+              reqs.push(user);
+              if (index === array.length -1) resolve();
+              return reqs;
+
               
             }
           });
         })
-       console.log(reqs);
+      })
+        bar.then(()=>{
+       console.log('req',reqs);
+      })
         res.render("home", { user: user ,requests:reqs });
       }
     });
@@ -412,7 +419,7 @@ app.post("/post", (req, res) => {
 
       if (err) res.render("login");
       else {
-        
+
       }
     })
   }
