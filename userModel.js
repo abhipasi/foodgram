@@ -68,6 +68,15 @@ const UserSchema = new mongoose.Schema({
       }
     }
   ],
+  followers:[
+    {
+      userid:String,
+      time:{
+        type: Date,
+        default: Date.now
+      }
+    }
+  ],
   chat:[
     {
       userid:String,
