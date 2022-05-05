@@ -6,7 +6,7 @@ import tensorflow as tf
 import sys
 import collections
 import random
-df_caption=pd.read_csv('C:/Users/shrujal/OneDrive/Desktop/foodogramNode/caption generation/captioneddata_final.csv') 
+df_caption=pd.read_csv('captioneddata_final.csv') 
 df_caption=df_caption.loc[df_caption['label']=='food']
 df_caption = df_caption[df_caption['photo_id']!="LXT4hCf1lRyUeM4HDBaSvg"]
 image_path_to_caption = collections.defaultdict(list)
