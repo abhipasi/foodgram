@@ -463,6 +463,7 @@ app.post('/delete',(req,res)=>{
     
     if (err) res.render("login");
     else {
+      console.log("del")
 
     }
   })
