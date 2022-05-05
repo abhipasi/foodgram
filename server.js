@@ -390,20 +390,10 @@ app.get("/msg", (req, res) => {
       else {
         console.log(req.query.userid)
         chat=user.chat
-        console.log(chat)
-        console.log(chat.find(chat.userid===req.query.userid))
-            
+        var msg=(chat.find(({ userid }) => userid === req.query.userid ));
+        res.render("message",{message:msg});
           }
-        })
-        // var chat = user.chat;
-        // console.log(chat);
-        // for (let i = 0; i < chat.length; i++) {
-
-        // }
-        // console.log(chat[1]['message']);
-        // var text=chat[l-1]['message'];
-        // res.send
-        res.render("message");
+        })        
       }
     });
 
