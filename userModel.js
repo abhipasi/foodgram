@@ -83,7 +83,10 @@ const UserSchema = new mongoose.Schema({
       userid:String,
       name:String,
       message:[{
-        sent:Boolean,
+        sent:{
+          type: Boolean,
+          default: false
+        },
         content:String,
         time:{
           type: Date,

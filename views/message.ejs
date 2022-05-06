@@ -38,11 +38,11 @@
         <div class="left">
           <a href="" class="profile">
             <div class="profile-picture">
-               <a href="/logout"><img src="./Images/profile.jpg" alt="logo" /></a>
+              <img src="./Images/profile.jpg" alt="logo" />
             </div>
             <div class="handle">
-              <h3>NAME</h3>
-              <p class="text-muted">@username</p>
+              <h3><%=user.name%></h3>
+              
             </div>
           </a>
           <!--sidebar-->
@@ -67,34 +67,29 @@
             <div class="feeds">
                 <div class="heading">
                     <h4>
-                       Siddhi
+                       <%=msg.name%>
                     </h4>
                     
                 </div>
+                <%  message.map(function(elem) {%>
+               <!-- <%console.log(elem.sent)%> -->
+               <%if(elem.sent){%>
                 <div class="container-msg">
+                  <!-- <span class="time-right"><%=elem.time%></span> -->
+                  <%}%>
+                  <%if(!elem.sent){%>
+                    <div class="container-msg darker">
+                      <!-- <span class="time-left">11:01</span> -->
+                  <%}%>
+
+                 
   <img src="Images/profimg.jpg" alt="Avatar" style="width:100%;">
 
-  <p>    <%=message%></p>
-  <span class="time-right">11:00</span>
+  <p>    <%=elem.content%></p>
+  
 </div>
+<%})%>
 
-<div class="container-msg darker">
-  <img src="Images/profimg.jpg" alt="Avatar" class="right" style="width:100%;">
-  <p>Hey! I'm fine. Thanks for asking!</p>
-  <span class="time-left">11:01</span>
-</div>
-
-<div class="container-msg">
-  <img src="Images/profimg.jpg" alt="Avatar" style="width:100%;">
-  <p>Sweet! So, what do you wanna do today?</p>
-  <span class="time-right">11:02</span>
-</div>
-
-<div class="container-msg darker">
-  <img src="Images/profimg.jpg" alt="Avatar" class="right" style="width:100%;">
-  <p>Nah, I dunno. Play soccer.. or learn more coding perhaps?</p>
-  <span class="time-left">11:05</span>
-</div>
 
        
         <div class="footer-chat">
@@ -108,7 +103,7 @@
       </div>
 
     </form>
-      <div class="right">
+      <!-- <div class="right">
         <div class="messages">
           <div class="heading">
               <h4>
@@ -116,19 +111,18 @@
               </h4>
               <i class="uil uil-edit"></i>
           </div>
-          <!--Searchbar-->
+        
           <div class="search-bar">
               <i class="uil uil-search"></i>
               <input type="text" placeholder="Search Messages" id="message-search" class="search-input">
               
           </div>
           
-          <!-- <div class="category">
-              <h6 class="active">Primary</h6>
+        
               
              
 
-          </div> -->
+         
           <div class="message">
               <div class="profile-picture">
                 <a href="/logout"><img src="./Images/profile.jpg" alt="logo" /><img
@@ -158,7 +152,7 @@
               </div>
           </div>
           </div>
-      </div>
+      </div> -->
     </main>
 
     <!-- <script src="./index.js"></script> -->

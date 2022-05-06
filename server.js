@@ -407,7 +407,7 @@ app.get("/msg", (req, res) => {
         console.log('msg',msg.message,id)
         
         res.cookie('oppuser',id)
-        res.render("message", { message: msg.message, id: id });
+        res.render("message", { message: msg.message, id: id ,msg:msg,user:user});
       }
     });
   }
@@ -426,6 +426,7 @@ app.post("/sendmessage", (req, res) => {
         var text = req.body.text;
         chat = user.chat;
         var msg = chat.find(({ userid }) => userid === oppuser);
+        
         msg.message.push({
           content: text,
           sent:true
@@ -435,8 +436,8 @@ app.post("/sendmessage", (req, res) => {
           err != null ? console.log(err) : console.log("Data updated");
         });
         var msg = chat.find(({ userid }) => userid === oppuser);
-        console.log(msg)
-        res.render("message", { message: msg });
+        
+        res.render("message", {user:user,msg:msg,message: msg.message });
       }
     });
   }
