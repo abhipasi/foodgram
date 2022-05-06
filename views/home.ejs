@@ -19,21 +19,18 @@
             <h2 class="logo">
                 Foodogram
             </h2>
-            <div class="search-bar">
-                <i class="uil uil-search"></i>
-                <input type="text" placeholder="Search for recipes, ingredients and more">
-            </div>
+            
             <div class="create">
                 <label class="btn btn-primary" for="create-post">
                    <a href="/createpost"> <span>Create </span></a>
                     </label>
                     <div class="profile-picture">
-                        <img
+                        <a href="/logout"><img
                         
                         src="./Images/profile.jpg"
                         alt="logo"
                         
-                      />
+                      /></a>
                     </div>
             </div>
         </div>
@@ -243,7 +240,7 @@
                                 </div>
                             </div>
                                 <div class="action">
-                                    <a href="/req?accept=<%=requests[i]._id%>" class="btn btn-primary">Accept</a>
+                                    <a href="/req?accept=<%=requests[i]._id%>&name=<%=requests[i].name%>" class="btn btn-primary">Accept</a>
                                     <form action="/delete" method="POST" class="delete">
                                     <button type="submit" class="btn" name="deletePost" value=<%=requests[i]._id%>> Decline</button>
                                     </form>

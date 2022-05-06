@@ -373,7 +373,7 @@ app.post("/classify", (req, res) => {
           ]);
           python.stdout.on("data", function (data) {
             const myArray = data.toString().split("++");
-            cook["caption2"] = myArray[1];
+            cook["caption"] = myArray[1];
             cook["class"] = myArray[0];
             res.cookie("image", cook);
             console.log(myArray[1]);
@@ -444,6 +444,7 @@ app.post("/sendmessage", (req, res) => {
 
 app.post("/post", (req, res) => {
   if (req.cookies.id) {
+    console.log(req.body)
     const id = req.cookies.id;
     User.findOne({ _id: id }, function (err, user) {
       //find the post base on post name or whatever criteria
@@ -452,12 +453,15 @@ app.post("/post", (req, res) => {
       else {
         image = req.cookies.image;
         console.log(image);
+        if(req.body.own){
+          var caption=req.body.own;
+        }
+        else{
+        var caption=image["caption"];
+        }
         user.post.push({
           img: image["file"],
-          generatedcaption: image["caption"],
-          crawledcaption: image["caption2"],
-          usercaption: image["usercaption"],
-          finalcaption: image["caption2"],
+          finalcaption:caption,
           class: image["class"],
           location: image["location"],
         });
@@ -492,6 +496,34 @@ app.get("/req", (req, res) => {
         user.followers.push({
           userid: postId,
         });
+        user.chat.push({
+          userid:postId,
+          name:req.query.name
+        })
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
+        const pullTodo = { $pull: { requests: { userid: postId } } }
+        User.findOneAndUpdate({ _id:id},pullTodo, {new: true}, function (err, user) {
+          console.log("1 document deleted");
+        });
+          
+        
+        res.redirect("/home");
+      
+    }})
+    }
+    });
+app.get("/follow", (req, res) => {
+  // console.log(req.params.topic);
+  const postId = req.query.userid;
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: postId }, function (err, user) {
+      if (!err) {
+        user.requests.push({
+          userid: id,
+        });
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
@@ -505,13 +537,25 @@ app.get("/req", (req, res) => {
 app.post("/cuisine", (req, res) => {
   const cuis = req.body.cuisine;
   // console.log(cuis);
-
+  User.findOne({ _id: req.cookies.id }, function (err, user) {
+    if (!err) {
+      user.cuisine=cuis;
+      user.save(function (err) {
+        err != null ? console.log(err) : console.log("Data updated");
+      });
   User.find({ cuisine: cuis }, function (err, user) {
     if (!err) {
       res.render("findBuddy", { prof: user });
     }
   });
+}
 });
+});
+
+app.get('/logout',(req,res)=>{
+  res.clearCookie("id");
+  res.render('login');
+})
 
 app.listen(3000, function () {
   console.log("listening on 3000");

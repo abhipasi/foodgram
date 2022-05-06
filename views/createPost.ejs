@@ -16,19 +16,13 @@
     <nav>
       <div class="container">
         <h2 class="logo">Foodogram</h2>
-        <div class="search-bar">
-          <i class="uil uil-search"></i>
-          <input
-            type="text"
-            placeholder="Search for recipes, ingredients and more"
-          />
-        </div>
+        
         <div class="create">
           <!-- <label class="btn btn-primary" for="create-post">
                     <span>Create </span>
                     </label> -->
           <div class="profile-picture">
-            <img src="./Images/profile.jpg" alt="logo" />
+            <a href="/logout"> <a href="/logout"><img src="./Images/profile.jpg" alt="logo" /></a></a>
           </div>
         </div>
       </div>
@@ -106,8 +100,7 @@
                   <p class="image-cap-crawled"><%=captioncrawl%></p>
                   
                   <%}%>
-                 
-                  <input type="text" class="image-cap2" placeholder="write your own caption">
+                  <input type="text" name="own" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
                   <button class="btn btn-primary" id="generate-caption">
@@ -122,7 +115,8 @@
               </button>
            </form>
             </div>
-                  <label class="btn" id="write-caption" onClick="displayManual()">
+            
+                  <label class="btn"  name="own" id="write-caption" onClick="displayManual()">
                      Write your caption
                   </label>
                  
