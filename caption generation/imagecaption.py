@@ -188,5 +188,20 @@ if '<end>' in result:
     result=result.replace('<end>','')
 if '<unk>' in result:
     result=result.replace('<unk>','')
-print(result)
+import nltk
+nltk.download('wordnet')
+nltk.download('omw-1.4')
+from nltk.corpus import wordnet as wn
+def if_food(word):
+    syns = wn.synsets(str(word), pos = wn.NOUN)
+    for syn in syns:
+        if 'food' in syn.lexname():
+            return 1
+    return 0
+str1=''
+for i in result.split(' '):
+    if (if_food(i)==1):
+        str1=str1+' '+i
+print(str1)
+# print(result)
 sys.stdout.flush()
