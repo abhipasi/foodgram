@@ -536,5 +536,13 @@ display: flex;
     margin:1rem 0;
     font-size: 0.85rem;
     line-height: 1.5;
+    overflow: hidden;
 }
 
+.feeds{
+    overflow-y: scroll;
+}
+::-webkit-scrollbar {
+    width: 0;  /* Remove scrollbar space */
+    background: transparent;  /* Optional: just make scrollbar invisible */
+}

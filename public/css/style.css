@@ -448,3 +448,8 @@ display: flex;
  .message-body a{
     color: black;
 }
+
+.image-ic{
+    font-size: 1.2rem;
+    margin-right:1rem;
+}
