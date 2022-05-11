@@ -438,7 +438,19 @@ app.post("/sendmessage", (req, res) => {
           err != null ? console.log(err) : console.log("Data updated");
         });
         var msg = chat.find(({ userid }) => userid === oppuser);
-        
+        User.findOne({_id:oppuser},function(err,opuser){
+          if(err) res.render("message");
+          else{
+            var opmsg=opuser.chat.find(({userid})=>userid===id);
+            opmsg.message.push({
+              content:text,
+              sent:false
+            });
+            opuser.save(function (err) {
+              err != null ? console.log(err) : console.log("Data updated");
+            });
+          }
+        })
         res.render("message", {user:user,msg:msg,message: msg.message });
       }
     });
