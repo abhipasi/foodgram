@@ -175,7 +175,8 @@ app.get("/home", (req, res) => {
                 }
               });
             });
-            user.followers.forEach(function(follower,index,array){
+           user.followers.forEach(function(follower,index,array){
+              
               User.find({ _id: follower.userid }, function (err, user) {
                 if (err) console.log(err);
                 else {
@@ -187,9 +188,10 @@ app.get("/home", (req, res) => {
               });
             })
           });
+         
           bar.then(() => {
             //  console.log('req',reqs.length);
-            console.log('folloe,',follow);
+            // console.log('follow,',follow);
             res.render("home", { user: user, requests: reqs,follow:follow });
           });
         } else {
@@ -436,7 +438,19 @@ app.post("/sendmessage", (req, res) => {
           err != null ? console.log(err) : console.log("Data updated");
         });
         var msg = chat.find(({ userid }) => userid === oppuser);
-        
+        User.findOne({_id:oppuser},function(err,opuser){
+          if(err) res.render("message");
+          else{
+            var opmsg=opuser.chat.find(({userid})=>userid===id);
+            opmsg.message.push({
+              content:text,
+              sent:false
+            });
+            opuser.save(function (err) {
+              err != null ? console.log(err) : console.log("Data updated");
+            });
+          }
+        })
         res.render("message", {user:user,msg:msg,message: msg.message });
       }
     });
@@ -504,8 +518,31 @@ app.get("/req", (req, res) => {
         user.save(function (err) {
           err != null ? console.log(err) : console.log("Data updated");
         });
+        
         const pullTodo = { $pull: { requests: { userid: postId } } }
         User.findOneAndUpdate({ _id:id},pullTodo, {new: true}, function (err, user) {
+          console.log("1 document deleted");
+        });
+          
+        
+       
+      
+    }})
+    User.findOne({ _id: postId }, function (err, user) {
+      if (!err) {
+        user.followers.push({
+          userid: id,
+        });
+        user.chat.push({
+          userid:id,
+          name:req.query.name
+        })
+        user.save(function (err) {
+          err != null ? console.log(err) : console.log("Data updated");
+        });
+        
+        const pullTodo = { $pull: { requests: { userid: id } } }
+        User.findOneAndUpdate({ _id:postId},pullTodo, {new: true}, function (err, user) {
           console.log("1 document deleted");
         });
           
@@ -514,6 +551,7 @@ app.get("/req", (req, res) => {
       
     }})
     }
+    
     });
 app.get("/follow", (req, res) => {
   // console.log(req.params.topic);
