@@ -6,7 +6,7 @@ import tensorflow as tf
 import sys
 import collections
 import random
-df_caption=pd.read_csv('C:/Users/shrujal/OneDrive/Desktop/foodogramNode/caption generation/captioneddata_final.csv') 
+df_caption=pd.read_csv('C:/Users/HP/foodogramNode/caption generation/captioneddata_final.csv') 
 df_caption=df_caption.loc[df_caption['label']=='food']
 df_caption = df_caption[df_caption['photo_id']!="LXT4hCf1lRyUeM4HDBaSvg"]
 image_path_to_caption = collections.defaultdict(list)
@@ -135,7 +135,7 @@ def evaluate(image):
             return result
         dec_input = tf.expand_dims([predicted_id], 0)
     return result
-testimage_path=image_file='C:/Users/shrujal/OneDrive/Desktop/foodogramNode/'+sys.argv[1]
+testimage_path=image_file='C:/Users/HP/foodogramNode/'+sys.argv[1]
 testcaption=''
 testimage_path_to_caption = collections.defaultdict(list)
 testimage_path_to_caption[testimage_path].append(testcaption)
