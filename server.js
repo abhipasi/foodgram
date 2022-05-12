@@ -377,13 +377,19 @@ app.post("/classify", (req, res) => {
             const myArray = data.toString().split("++");
             cook["caption"] = myArray[1];
             cook["class"] = myArray[0];
+            cook['url']=myArray[6];
+          const altcap =[myArray[2],myArray[3],myArray[4],myArray[5]];
+
+
             res.cookie("image", cook);
-            console.log(myArray[1]);
+            // console.log(myArray[2]);
+
             res.render("createPost", {
               path: filepath.slice(7),
               captioncrawl: myArray[1],
               classify: myArray[0],
               user: user,
+              altcap:altcap
             });
             return;
           });
@@ -394,6 +400,35 @@ app.post("/classify", (req, res) => {
     });
   }
 });
+
+app.post("/altcap", (req, res) => {
+  if (req.cookies.id) {
+    const id = req.cookies.id;
+    User.findOne({ _id: id }, function (err, user) {
+      //find the post base on post name or whatever criteria
+
+      if (err) res.render("login");
+      else {
+        if (req.cookies.image) {
+          cook = req.cookies.image;
+        
+            cook["caption"] = req.body.altcaption
+
+            res.cookie("image", cook);
+            // console.log(myArray[2]);
+
+            res.render("createPost", {
+              caption:req.body.altcaption,
+              user:user,
+              path:req.cookies.file,
+            });
+            return;
+          }
+      }
+  })
+}
+});
+
 
 app.get("/msg", (req, res) => {
   if (req.cookies.id) {

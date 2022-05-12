@@ -37,7 +37,7 @@
               <img src="./Images/profile.jpg" alt="logo" />
             </div>
             <div class="handle">
-             <h3><%=user.username%></h3>
+             <h3><%=user.name%></h3>
               <!-- <p class="text-muted">@username</p> -->
             </div>
           </a>
@@ -97,9 +97,19 @@
                   <%}%>
                   <% if(typeof(captioncrawl) != 'undefined') {%>
                     <h5>Detected <%=classify%>...</h5>
+                    
                   <p class="image-cap-crawled"><%=captioncrawl%></p>
+                  <h4> Here are few more recommendations :</h4>
+                  <form action="/altcap" method="post">
+                  <ol>
+                    <% for (var i = 0; i < altcap.length; i++) { %>
+                    <li><button type="radio" name="altcaption" value="<%=altcap[i]%>"> <%= altcap[i] %></button></li>
+                    <%}%>
+                  </ol>
                   
                   <%}%>
+                  </form>
+                  <br/>
                   <input type="text" name="own" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
