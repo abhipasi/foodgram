@@ -93,28 +93,43 @@
               <div class="message-body">
                 <div class="action">
                   <% if(typeof(caption) != 'undefined') {%>
-                  <p class="image-cap1"><%=caption%></p>
+                    <h5>Here are certain keywords for your image: </h5>
+                    <div class="image-cap1">
+                    <% for (var i = 0; i < caption.length; i++) { %>
+                  
+                    <li><%=caption[i]%></li>
                   <%}%>
+                </div>
+                  <%}%>
+                  <% if(typeof(newcap) != 'undefined') {%>
+                    <p class="image-cap-crawled"><%=newcap%></p>
+                    <%}%>
                   <% if(typeof(captioncrawl) != 'undefined') {%>
-                    <h5>Detected <%=classify%>...</h5>
+                    <h5 class="new">Detected <%=classify%>...</h5>
                     
-                  <p class="image-cap-crawled"><%=captioncrawl%></p>
-                  <h4> Here are few more recommendations :</h4>
-                  <form action="/altcap" method="post">
+                  <div class="image-cap-crawled">
+                    <p><%=captioncrawl%></p>
+                    <i class="uil uil-info-circle tooltip">
+                      <span class="tooltiptext"> cited from : <%=url%></span>
+                    </i>
+                  </div>
+                  <h4 class="new"> Here are few more recommendations :</h4>
+                  <form action="/altcap" method="post" class="new">
                   <ol>
                     <% for (var i = 0; i < altcap.length; i++) { %>
-                    <li><button type="radio" name="altcaption" value="<%=altcap[i]%>"> <%= altcap[i] %></button></li>
+                    <li><input type="radio" name="altcaption" value="<%=altcap[i]%>" onclick="this.form.submit()"> <%= altcap[i] %></input></li>
                     <%}%>
                   </ol>
                   
                   <%}%>
                   </form>
+                
                   <br/>
                   <input type="text" name="own" class="image-cap2" placeholder="write your own caption">
                   <form action="/generate" method="post">
                   <div class="buttons">
                   <button class="btn btn-primary" id="generate-caption">
-                      Generate Caption
+                      Generate Caption Keywords
                   </button>
                </form>
                
@@ -168,6 +183,12 @@ function displayManual(){
   document.getElementById("write-caption").style.display = "none";
   document.getElementById("generate-caption").style.display = "none";
   document.getElementById("generate-caption-ig").style.display = "none";
+  document.getElementsByClassName("image-cap-crawled")[0].style.display = "none";
+  document.getElementsByClassName("new")[0].style.display = "none";
+  document.getElementsByClassName("new")[1].style.display = "none";
+  document.getElementsByClassName("new")[2].style.display = "none";
+  document.getElementsByClassName("image-cap1")[0].style.display = "none";
+  document.getElementsByClassName("image-cap-crawled")[1].style.display = "none";
   
 }
 

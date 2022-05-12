@@ -169,29 +169,19 @@ app.get("/home", (req, res) => {
                 if (err) console.log(err);
                 else {
                   reqs.push(user[0]);
-                  console.log(array.length);
+                  
                   if (index === array.length - 1) resolve();
                   return reqs;
                 }
               });
             });
-           user.followers.forEach(function(follower,index,array){
-              
-              User.find({ _id: follower.userid }, function (err, user) {
-                if (err) console.log(err);
-                else {
-                  follow.push(user[0]);
-                  console.log(array.length);
-                  if (index === array.length - 1) resolve();
-                  return follow;
-                }
-              });
-            })
+            
+           
           });
-         
+          
           bar.then(() => {
-            //  console.log('req',reqs.length);
-            // console.log('follow,',follow);
+            
+            
             res.render("home", { user: user, requests: reqs,follow:follow });
           });
         } else {
@@ -224,16 +214,7 @@ app.post("/addpost", (req, res) => {
     });
   }
 });
-// if (req.cookies.id) {
-//     const id = req.cookies.id;
-//     User.findOne({ _id: id }, function (err, user) { //find the post base on post name or whatever criteria
 
-//         if (err)
-//             console.log(err);
-//         else {
-//         }
-//     });
-// }
 //findmybuddy
 app.get("/findmybuddy", (req, res) => {
   if (req.cookies.id) {
@@ -292,9 +273,7 @@ app.get("/profile", (req, res) => {
   }
 });
 
-// app.post('/createpost',(req,res)=>{
-//     console.log(req.body);
-// });
+
 app.post("/addimage", upload.single("filename"), (req, res, next) => {
   if (req.cookies.id) {
     const id = req.cookies.id;
@@ -341,10 +320,10 @@ app.post("/generate", (req, res) => {
           python.stdout.on("data", function (data) {
             cook["caption"] = data.toString();
             res.cookie("image", cook);
-            console.log(data.toString());
+            console.log(data.toString().match(/\b(\w+)\b/g));
             res.render("createPost", {
               path: filepath.slice(7),
-              caption: data.toString(),
+              caption: data.toString().match(/\b(\w+)\b/g),
               user: user,
             });
             return;
@@ -374,6 +353,7 @@ app.post("/classify", (req, res) => {
             filepath,
           ]);
           python.stdout.on("data", function (data) {
+            console.log(data.toString())
             const myArray = data.toString().split("++");
             cook["caption"] = myArray[1];
             cook["class"] = myArray[0];
@@ -388,6 +368,7 @@ app.post("/classify", (req, res) => {
               path: filepath.slice(7),
               captioncrawl: myArray[1],
               classify: myArray[0],
+              url:myArray[6],
               user: user,
               altcap:altcap
             });
@@ -411,22 +392,19 @@ app.post("/altcap", (req, res) => {
       else {
         if (req.cookies.image) {
           cook = req.cookies.image;
-        
-            cook["caption"] = req.body.altcaption
-
-            res.cookie("image", cook);
-            // console.log(myArray[2]);
-
-            res.render("createPost", {
-              caption:req.body.altcaption,
-              user:user,
-              path:req.cookies.file,
-            });
-            return;
-          }
+          const filepath = req.cookies.image["file"];
+          const altcap=req.body.altcaption;
+          res.cookie("image", cook);
+          res.render("createPost", {
+            path: filepath.slice(7),
+            user: user,
+            newcap:altcap
+          });
+          return;
+        }
       }
-  })
-}
+    });
+  }
 });
 
 
@@ -441,7 +419,7 @@ app.get("/msg", (req, res) => {
         chat = user.chat;
         var id=req.query.userid
         var msg = chat.find(({ userid }) => userid === req.query.userid);
-        console.log('msg',msg.message,id)
+        
         
         res.cookie('oppuser',id)
         res.render("message", { message: msg.message, id: id ,msg:msg,user:user});
@@ -476,7 +454,9 @@ app.post("/sendmessage", (req, res) => {
         User.findOne({_id:oppuser},function(err,opuser){
           if(err) res.render("message");
           else{
+            
             var opmsg=opuser.chat.find(({userid})=>userid===id);
+            
             opmsg.message.push({
               content:text,
               sent:false

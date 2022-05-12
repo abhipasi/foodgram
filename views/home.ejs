@@ -52,6 +52,7 @@
                     
                       <div class="handle">
                         <h3><%=user.name%></h3>
+                        
                         <!-- <p class="text-muted">@<%=user.username%></p> -->
                       </div>
                     
@@ -92,21 +93,88 @@
                 </form>
                 <!--FEED-->
                 <div class="feeds">
-
+                    <% for(var i=0; i<follow.length; i++) { %>
+                        <div class="feed">
+                            <div class="head">
+                                <div class="user">
+                                    <div class="profile-picture">
+                                        <img
+                                        
+                                        src="./Images/prof2.jpg"
+                                        alt="logo"
+                                        
+                                      />
+                                    </div>
+                                    <div class="ingo">
+                                        <h3><%=follow[i].name%></h3>
+                                        <small>Dubai, 15 MINUTES AGO</small>
+                                    </div>
+                                </div>
+                                
+                               
+                            </div>
+                        
+                        <div class = "photo">
+                            <img src="./Images/burg.jpg" alt="">
+                        </div>
+                        <div class = "action-button">
+                            <div class="interactive-button">
+                                
+                                
+                            </div>
+                               
+                        </div>
                        
+                        <div class="caption">
+                            <p><span><b>Burhan </b></span>
+                                 I love pizza. </p>
+                        </div>
+                    </div>
+                    <%}%>
+
+
+                    <% if(user.name=="dhruv") { %>
                     <div class="feed">
                         <div class="head">
                             <div class="user">
                                 <div class="profile-picture">
                                     <img
                                     
-                                    src="./Images/prof2.jpg"
+                                    src="./Images/profimg.jpg"
                                     alt="logo"
                                     
                                   />
                                 </div>
                                 <div class="ingo">
-                                    <h3>Dhruv</h3>
+                                    
+                                    <small>Mumbai, 5 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                    
+                   
+                    <div class="caption">
+                        <p><span><b>Burhan</b></span>
+                            I love pizza. </p>
+                    </div>
+                </div>
+                
+                     
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-picture">
+                                    <img
+                                    
+                                    src="./Images/profimg.jpg"
+                                    alt="logo"
+                                    
+                                  />
+                                </div>
+                                <div class="ingo">
+                                    <h3>Burhan</h3>
                                     <small>Dubai, 15 MINUTES AGO</small>
                                 </div>
                             </div>
@@ -126,45 +194,76 @@
                     </div>
                    
                     <div class="caption">
-                        <p><span><b>Dhruv</b></span>
+                        <p><span><b>Burhan</b></span>
                              Burgers are my favorite food group </p>
                     </div>
                 </div>
-                
-                <div class="feed">
-                    <div class="head">
-                        <div class="user">
-                            <div class="profile-picture">
-                                <img
-                                
-                                src="./Images/profimg.jpg"
-                                alt="logo"
-                                
-                              />
+                <%}%>  
+                <% if(user.name=="burhan") { %>
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-picture">
+                                    <img
+                                    
+                                    src="./Images/profimg.jpg"
+                                    alt="logo"
+                                    
+                                  />
+                                </div>
+                                <div class="ingo">
+                                    <h3>Dhruv</h3>
+                                    <small>UK, 60 MINUTES AGO</small>
+                                </div>
                             </div>
-                            <div class="ingo">
-                                <h3>Siddhi</h3>
-                                <small>Mumbai, 1 DAY AGO</small>
-                            </div>
+                            
+                           
                         </div>
-                        
-                       
+                    
+                    <div class = "photo">
+                        <img src="./Images/Foodogram.png" alt="">
                     </div>
-                
-                <div class = "photo">
-                    <img src="./Images/Foodogram.png" alt="">
-                </div>
-                <div class = "action-button">
-                    <div class="interactive-button">
-                       
+                    <div class = "action-button">
+                        <div class="interactive-button">
+                            
+                            
+                        </div>
+                           
                     </div>
-                       
+                   
+                    <div class="caption">
+                        <p><span><b>Dhruv</b></span>
+                             Love the new foodogram </p>
+                    </div>
+                </div>
+                    <div class="feed">
+                        <div class="head">
+                            <div class="user">
+                                <div class="profile-picture">
+                                    <img
+                                    
+                                    src="./Images/profimg.jpg"
+                                    alt="logo"
+                                    
+                                  />
+                                </div>
+                                <div class="ingo">
+                                    
+                                    <small>Goa, 9 MINUTES AGO</small>
+                                </div>
+                            </div>
+                            
+                           
+                        </div>
+                    
+                   
+                    <div class="caption">
+                        <p><span><b>Dhruv</b></span>
+                            Sugar, spice, and everything nice. </p>
+                    </div>
                 </div>
                 
-                <div class="caption">
-                    <p><b>Siddhi</b> Love the new app "Foodogram" </p>
-                </div>
-            </div>
+                   <%}%>    
             </div>
             </div>
             <!--right-->
@@ -191,6 +290,7 @@
 
                     </div> -->
                     <%  user.chat.map(function(elem) {%>
+                        <%console.log('elem',elem)%>
                     <div class="message">
                         <div class="profile-picture">
                             <img
@@ -204,7 +304,7 @@
                         <div class="message-body">
                             
                             <a href="./msg?userid=<%=elem.userid%>">
-                               <%console.log(elem.userid)%>
+                              
                             <h5><%=elem.name%></h5>
                            
                                

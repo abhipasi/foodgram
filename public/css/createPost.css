@@ -525,7 +525,10 @@ display: flex;
   #reset-caption{
       display:none;
   }
-
+  .image-cap-crawled{
+      display:flex;
+      justify-content: space-between;
+  }
   
   .image-cap1,.image-cap2,.image-cap-crawled,.image-cap-another{
      
@@ -535,7 +538,7 @@ display: flex;
       padding: var(--search-padding);
       /* font-size: 3rem; */
       margin-bottom: 1rem;
-      text-align: center;
+      text-align: start;
 
   }
  
@@ -578,3 +581,29 @@ display: flex;
 #generate-caption{
     margin-right: 2rem;
 }
+
+.tooltip {
+    position: relative;
+    display: inline-block;
+    
+  }
+  
+  .tooltip .tooltiptext {
+    visibility: hidden;
+   font-size: 0.8rem;
+    background-color: black;
+    color: #fff;
+    text-align: center;
+    border-radius: 6px;
+    padding: 5px 0;
+    
+    /* Position the tooltip */
+    position: absolute;
+    z-index: 1;
+    top: -5px;
+    left: 105%;
+  }
+  
+  .tooltip:hover .tooltiptext {
+    visibility: visible;
+  }
